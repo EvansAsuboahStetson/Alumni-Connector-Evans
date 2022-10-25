@@ -1,4 +1,4 @@
-import { Card, Form, Button, Spinner } from "react-bootstrap";
+import { Card, Form, Button, Spinner, ButtonGroup } from "react-bootstrap";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { signup } from "../../functions/auth";
@@ -8,12 +8,12 @@ export default function SignupPage() {
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({ show: false, title: "", message: "" });
+  const userTypeRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const nameRef = useRef();
-  const streetRef = useRef();
-  const cityRef = useRef();
-  const zipRef = useRef();
+  const majorRef = useRef();
+
 
   const registerUser = async (data) => {
     setLoading(true);
@@ -42,6 +42,11 @@ export default function SignupPage() {
     }
   };
 
+
+  const [formBasicUserType, setUserType] = useState('Student');
+
+  const handleChange = (event) => {setUserType(event.target.value)}
+
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
@@ -57,11 +62,8 @@ export default function SignupPage() {
       email: emailRef.current.value,
       password: passwordRef.current.value,
       name: nameRef.current.value,
-      address: {
-        street: streetRef.current.value,
-        city: cityRef.current.value,
-        zip: zipRef.current.value,
-      },
+      userType: userTypeRef.current.value,
+      major: majorRef.current.value,
     };
     registerUser(data);
   };
@@ -73,6 +75,32 @@ export default function SignupPage() {
         <Card.Header>Signup</Card.Header>
         <Card.Body>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
+
+
+          <Form.Group controlId="formBasicUserType">
+            <Form.Check
+              name="userType"
+              value="Student"
+              type="radio"
+              aria-label="radio 1"
+              label="Student"
+              ref={userTypeRef}
+              onChange={handleChange}
+              checked={formBasicUserType === "Student"}
+            />
+            <Form.Check
+              name="userType"
+              value="Alumn"
+              type="radio"
+              aria-label="radio 2"
+              label="Alumn"
+              ref={userTypeRef}
+              onChange={handleChange}
+              checked={formBasicUserType === "Alumn"}
+            />
+          </Form.Group>
+
+
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -103,33 +131,36 @@ export default function SignupPage() {
               />
             </Form.Group>
 
-            <Form.Group controlId="formBasicStreet">
-              <Form.Label>Street</Form.Label>
+{/*}
+            <Form.Group controlId="formBasicFirst">
+              <Form.Label>First</Form.Label>
               <Form.Control
                 required
                 type="text"
-                placeholder="Enter street"
-                ref={streetRef}
+                placeholder="Enter first name"
+                ref={firstRef}
               />
             </Form.Group>
 
-            <Form.Group controlId="formBasicCity">
-              <Form.Label>City</Form.Label>
+
+            <Form.Group controlId="formBasicLast">
+              <Form.Label>Last</Form.Label>
               <Form.Control
                 required
                 type="text"
-                placeholder="Enter city"
-                ref={cityRef}
+                placeholder="Enter last name"
+                ref={lastRef}
               />
             </Form.Group>
+  */}
 
-            <Form.Group controlId="formBasicZip">
-              <Form.Label>Zip</Form.Label>
+            <Form.Group controlId="formBasicMajor">
+              <Form.Label>Major</Form.Label>
               <Form.Control
                 required
                 type="text"
-                placeholder="Enter zip"
-                ref={zipRef}
+                placeholder="Enter major"
+                ref={majorRef}
               />
             </Form.Group>
 
