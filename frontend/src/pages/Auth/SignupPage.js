@@ -59,13 +59,15 @@ export default function SignupPage() {
 
     // Register user
     const data = {
-      role: userTypeRef.current.value,
+      role:formBasicUserType,
       email: emailRef.current.value,
       password: passwordRef.current.value,
       name: nameRef.current.value,
       major: majorRef.current.value,
     };
-    registerUser(data);
+
+    console.log(data)
+   registerUser(data);
   };
 
   return (
