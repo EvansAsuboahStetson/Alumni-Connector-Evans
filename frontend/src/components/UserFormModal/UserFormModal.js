@@ -72,18 +72,18 @@ export default function UserFormModal(props) {
             <Form.Control
               type="text"
               placeholder="Enter role"
-              ref={emailRef}
+              ref={roleRef}
               defaultValue={user?.role}
               disabled
             />
           </Form.Group>
 
-          <Form.Group controlId="formBasicTextEmail">
+          <Form.Group controlId="formBasicTextMajor">
             <Form.Label>Major</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter major"
-              ref={emailRef}
+              ref={majorRef}
               defaultValue={user?.major}
               required
             />

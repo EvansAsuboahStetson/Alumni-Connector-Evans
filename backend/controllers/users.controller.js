@@ -47,7 +47,7 @@ exports.update = (req, res) => {
     req.params.userId,
     {
       name: req.body.name || undefined,
-      address: req.body.address || undefined,
+      major: req.body.major || undefined,
     },
     { new: true }
   )
