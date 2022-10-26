@@ -35,6 +35,7 @@ export default function HomePage() {
   }, []);
 
   return (
+
     <Container>
       {loading ? (
         <div className="d-flex justify-content-center">

@@ -43,7 +43,7 @@ export default function SignupPage() {
   };
 
 
-  const [formBasicUserType, setUserType] = useState('Student');
+  const [formBasicUserType, setUserType] = useState('student');
 
   const handleChange = (event) => {setUserType(event.target.value)}
 
@@ -59,7 +59,7 @@ export default function SignupPage() {
 
     // Register user
     const data = {
-      userType: userTypeRef.current.value,
+      role: userTypeRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value,
       name: nameRef.current.value,
@@ -80,23 +80,23 @@ export default function SignupPage() {
           <Form.Group controlId="formBasicUserType">
             
             <Form.Check
-              value="Student"
+              value="student"
               type="radio"
               aria-label="radio 1"
               label="Student"
               ref={userTypeRef}
               onChange={handleChange}
-              checked={formBasicUserType === "Student"}
+              checked={formBasicUserType === "student"}
               
             />
             <Form.Check
-              value="Alumn"
+              value="alumni"
               type="radio"
               aria-label="radio 2"
               label="Alumn"
               ref={userTypeRef}
               onChange={handleChange}
-              checked={formBasicUserType === "Alumn"}
+              checked={formBasicUserType === "alumni"}
             />
           </Form.Group>
 
