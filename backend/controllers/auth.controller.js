@@ -49,10 +49,11 @@ exports.signup = (req, res) => {
         }
 
         const newUser = User({
+          role: req.body.role,
           email: req.body.email,
           password: hash,
           name: req.body.name,
-          address: req.body.address,
+          major: req.body.major,
         });
         newUser.save().then((user) => {
           const data = {

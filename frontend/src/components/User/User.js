@@ -9,9 +9,8 @@ export default function User(props) {
           <Card.Body>
             <Card.Title>{user.name}</Card.Title>
             <Card.Text>{user.email}</Card.Text>
-            <Card.Text>Street: {user.address?.street}</Card.Text>
-            <Card.Text>City: {user.address?.city}</Card.Text>
-            <Card.Text>Zip: {user.address?.zip}</Card.Text>
+            <Card.Text>{user.role}</Card.Text>
+            <Card.Text>{user.major}</Card.Text>
           </Card.Body>
         </Col>
         <Col md="4">

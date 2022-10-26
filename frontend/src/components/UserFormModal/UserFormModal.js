@@ -8,9 +8,8 @@ export default function UserFormModal(props) {
 
   const nameRef = useRef(user?.name);
   const emailRef = useRef(user?.email);
-  const streetRef = useRef(user?.address?.street);
-  const cityRef = useRef(user?.address?.city);
-  const zipRef = useRef(user?.address?.zip);
+  const roleRef = useRef(user?.role);
+  const majorRef = useRef(user?.major);
 
   useEffect(() => {
     if (show) {
@@ -32,11 +31,8 @@ export default function UserFormModal(props) {
     const user = {
       name: nameRef.current.value,
       email: emailRef.current.value,
-      address: {
-        street: streetRef.current.value,
-        city: cityRef.current.value,
-        zip: zipRef.current.value,
-      },
+      role: roleRef.current.value,
+      major: majorRef.current.value,
     };
 
     onSubmit(user);
@@ -71,35 +67,24 @@ export default function UserFormModal(props) {
             />
           </Form.Group>
 
-          <Form.Group controlId="formBasicTextStreet">
-            <Form.Label>Street</Form.Label>
+          <Form.Group controlId="formBasicTextEmail">
+            <Form.Label>Role</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter street"
-              ref={streetRef}
-              defaultValue={user?.address?.street}
-              required
+              placeholder="Enter role"
+              ref={emailRef}
+              defaultValue={user?.role}
+              disabled
             />
           </Form.Group>
 
-          <Form.Group controlId="formBasicTextCity">
-            <Form.Label>City</Form.Label>
+          <Form.Group controlId="formBasicTextEmail">
+            <Form.Label>Major</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter city"
-              ref={cityRef}
-              defaultValue={user?.address?.city}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicTextZip">
-            <Form.Label>Zip</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter zip"
-              ref={zipRef}
-              defaultValue={user?.address?.zip}
+              placeholder="Enter major"
+              ref={emailRef}
+              defaultValue={user?.major}
               required
             />
           </Form.Group>

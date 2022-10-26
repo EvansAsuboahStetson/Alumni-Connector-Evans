@@ -13,18 +13,16 @@ const model = mongoose.Schema(
     },
     role: {
       type: String,
-      enum: [roles.ADMIN, roles.USER],
-      default: roles.USER,
+      enum: [roles.ADMIN, roles.STUDENT, roles.ALUMNI],
     },
     name: {
       type: String,
       required: true,
     },
-    address: {
-      street: { type: String, required: true },
-      city: { type: String, required: true },
-      zip: { type: String, required: true },
-    },
+    major: {
+      type: String,
+      required: true,
+    }
   },
   { timestamps: true }
 );

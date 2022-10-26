@@ -59,10 +59,10 @@ export default function SignupPage() {
 
     // Register user
     const data = {
+      userType: userTypeRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value,
       name: nameRef.current.value,
-      userType: userTypeRef.current.value,
       major: majorRef.current.value,
     };
     registerUser(data);
@@ -78,8 +78,8 @@ export default function SignupPage() {
 
 
           <Form.Group controlId="formBasicUserType">
+            
             <Form.Check
-              name="userType"
               value="Student"
               type="radio"
               aria-label="radio 1"
@@ -87,9 +87,9 @@ export default function SignupPage() {
               ref={userTypeRef}
               onChange={handleChange}
               checked={formBasicUserType === "Student"}
+              
             />
             <Form.Check
-              name="userType"
               value="Alumn"
               type="radio"
               aria-label="radio 2"
