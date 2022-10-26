@@ -3,6 +3,7 @@ import { Container, Spinner } from "react-bootstrap";
 import Events from "../../components/Events/Events";
 import { getEvents } from "../../functions/events";
 import AlertModal from "../../components/AlertModal/AlertModal";
+import NavScrollExample from "../../components/Navbar/Navbar";
 
 export default function HomePage() {
   const [events, setEvents] = useState([]);
@@ -36,6 +37,9 @@ export default function HomePage() {
 
   return (
     <Container>
+      <div>
+        <NavScrollExample />
+      </div>
       {loading ? (
         <div className="d-flex justify-content-center">
           <Spinner animation="border" variant="dark" />
