@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
@@ -30,7 +31,7 @@ export default function MenuBar(props) {
               className="me-2"
               aria-label="Search"
             />
-            <Link to="/MajorPage">
+            <Link to = "/MajorPage">
             <Button variant="outline-success">Search</Button>
             </Link>
           </Form>

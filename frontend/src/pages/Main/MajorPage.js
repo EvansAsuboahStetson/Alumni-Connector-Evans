@@ -3,7 +3,7 @@ import React from "react";
 function Majorpage() {
     return (
         <div>
-            <input type="majors" placeholder="majorstest" />
+            <h1> Displayed Data </h1>
         </div>
     );
 }
