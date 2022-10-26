@@ -26,11 +26,13 @@ export default function MenuBar(props) {
             <Form className="d-flex">
             <Form.Control
               type="search"
-              placeholder="Search"
+              placeholder="Search for a major..."
               className="me-2"
               aria-label="Search"
             />
+            <Link to="/MajorPage">
             <Button variant="outline-success">Search</Button>
+            </Link>
           </Form>
           </Container>
         </Navbar>
