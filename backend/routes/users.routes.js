@@ -10,6 +10,19 @@ router.get(
   middleware.allowAdmin,
   usersController.findAll
 );
+//admin to retrieve matches of users
+router.post(
+  "/users/:userId/matches",
+  middleware.verify,
+  middleware.allowAdmin,
+  usersController.findMatches
+);
+//user to retrieve their own matches
+router.post(
+  "/user/matches",
+  middleware.verify,
+  usersController.findMatches
+);
 
 // Retrieve user by userId
 router.get(
