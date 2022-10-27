@@ -28,3 +28,4 @@ exports.verify = (req, res, next) => {
 
 exports.allowAdmin = allowRoles([roles.ADMIN]);
 exports.allowRoles = allowRoles;
+

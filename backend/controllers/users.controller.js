@@ -10,6 +10,51 @@ exports.findAll = (req, res) => {
     );
 };
 
+//find the matches
+
+exports.findMatches = (req, res) => {
+  console.log(req.user.role)
+  var userId = 0
+
+  if (req.user.role=="admin")
+  {
+    userId = req.params.userId
+  }
+  else{
+    userId = req.user._id
+  }
+  // const userId = req.params.userId;
+
+  
+  if (!req.body) {
+    return res.status(400).send({
+      message: "Search content can not be empty",
+    });
+  }
+  User.find({
+    major: req.body.major,
+    _id: { $ne: userId },
+  })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({
+          message: "User not found",
+        });
+      }
+      res.send(user);
+    })
+    .catch((error) => {
+      if (error.kind === "ObjectId") {
+        return res.status(404).send({
+          message: "User not found.",
+        });
+      }
+      return res.status(500).send({
+        message: "Error retrieving user with id " + req.params.userId,
+      });
+    });
+};
+
 // Function to find user by userId
 exports.findById = (req, res) => {
   User.findById(req.params.userId, { password: 0 })
