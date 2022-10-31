@@ -9,25 +9,35 @@ const SearchBar = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [setError] = useState("");
   const [input, setInput] = useState("");
+  const [datInput,setDatInput] = useState("")
 
-  useEffect(async () => {
+  useEffect( () => {
     const token = localStorage.getItem("token");
-    try {
-      const response = await getMatches(token);
-      console.log("I am the response",input)
-      setData(response.data);
-      setFilteredData(response.data);
-    } catch (err) {
-      console.log(err);
-      setError(err);
-    };
-  }, [input]);
+
+    const fetcMatches = async()=>{
+      try {
+        const datum = {
+          major: input
+        };
+        const {data} = await getMatches(token,datum);
+        console.log("I am the response",data)
+        setData(data);
+        setFilteredData(data);
+      } catch (err) {
+        console.log(err);
+        setError(err);
+      };
+    }
+    fetcMatches()
+
+  },[input]);
+  
   const handleFilter = (e) => {
     console.log(e);
     const searchInput = e.target.value;
     setInput(searchInput);
-    const newFilter = data.filter((value) => {
-      return value.first_name.toLowerCase().includes(searchInput.toLowerCase());
+    const newFilter = data?.filter((value) => {
+      return value?.first_name?.toLowerCase().includes(searchInput.toLowerCase());
     });
     if (searchInput === "") {
       setFilteredData([]);

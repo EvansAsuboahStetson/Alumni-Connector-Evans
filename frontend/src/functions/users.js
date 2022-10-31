@@ -24,11 +24,12 @@ export const getUser = async (userId, token) => {
 };
 
 // Function to match search results
-export const getMatches = async ( token, data) => {
+export const getMatches = async ( token, credentials) => {
+  console.log("getMatches",credentials)
   return axios({
-    method: "post",
+    method: "POST",
     url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.MATCHES}`,
-    data: data,
+    data: credentials,
     headers: {
       Authorization: `Bearer ${token}`,
     },
