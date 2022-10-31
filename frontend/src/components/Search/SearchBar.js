@@ -1,27 +1,27 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { getUser, updateUse, getMatches } from "../../functions/users";
+import { getMatches } from "../../functions/users";
 import { Input } from "antd";
 
 const { Search } = Input;
 const SearchBar = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [error, setError] = useState("");
+  const [setError] = useState("");
   const [input, setInput] = useState("");
 
   useEffect(async () => {
     const token = localStorage.getItem("token");
     try {
       const response = await getMatches(token);
-      console.log("I am the response",response)
+      console.log("I am the response",input)
       setData(response.data);
       setFilteredData(response.data);
     } catch (err) {
       console.log(err);
       setError(err);
     };
-  }, []);
+  }, [input]);
   const handleFilter = (e) => {
     console.log(e);
     const searchInput = e.target.value;
@@ -59,4 +59,4 @@ const SearchBar = () => {
     </div>
   )
 }
-export default SearchBar
+export default SearchBar;
