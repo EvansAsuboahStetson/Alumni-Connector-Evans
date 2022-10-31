@@ -1,4 +1,5 @@
 import React from "react";
+// create forms like in the admin page (ask where that is) that dipslay the selected alum or students.
 
 function Majorpage() {
     return (

@@ -42,7 +42,7 @@ function getRoutes(user) {
     { path: "/users", component: UsersPage, exact: true },
     { path: "/logout", component: Logout, exact: true },
 
-    {path:"/matches",component: Matches,exact:true}
+    {path:"/matches",component: Matches,exact:true},
 
     { path: "/majorpage", component: Majorpage, exact: true},
 

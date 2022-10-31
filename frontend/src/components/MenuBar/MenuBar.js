@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import SearchBar from "../Search/SearchBar";
 
 export default function MenuBar(props) {
   const { menuItems, routes, bg, variant } = props;
@@ -24,17 +24,7 @@ export default function MenuBar(props) {
                 })}
               </Nav>
             </Navbar.Collapse>
-            <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search for a major..."
-              className="me-2"
-              aria-label="Search"
-            />
-            <Link to = "/MajorPage">
-            <Button variant="outline-success">Search</Button>
-            </Link>
-          </Form>
+            <SearchBar />
           </Container>
         </Navbar>
       ) : (
