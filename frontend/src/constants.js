@@ -6,6 +6,7 @@ exports.constants = {
       SIGNUP: "/api/auth/signup",
       USERS: "/api/users",
       EVENTS: "/api/events",
+      MATCHES:"/api/matches"
     },
   },
 };

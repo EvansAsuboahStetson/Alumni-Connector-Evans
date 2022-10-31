@@ -7,6 +7,7 @@ import HomePage from "../../pages/Main/HomePage";
 import UsersPage from "../../pages/Main/UsersPage";
 import UserEventsPage from "../../pages/Main/UserEventsPage";
 import ProfilePage from "../../pages/Main/ProfilePage";
+import Matches from "../../pages/Main/Matches";
 
 function getMenuItems(user) {
   if (!user) {
@@ -36,6 +37,7 @@ function getRoutes(user) {
     { path: "/users/:userId", component: ProfilePage, exact: true },
     { path: "/users", component: UsersPage, exact: true },
     { path: "/logout", component: Logout, exact: true },
+    {path:"/matches",component: Matches,exact:true}
   ];
 }
 
