@@ -22,6 +22,17 @@ export const getUser = async (userId, token) => {
     },
   });
 };
+//function to get matches
+
+export const getMatches = async (userId, token) => {
+  return axios({
+    method: "get",
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.MATCHES}/${userId}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 // Function to update user
 export const updateUser = async (userId, data, token) => {
