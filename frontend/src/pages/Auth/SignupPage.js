@@ -43,9 +43,12 @@ export default function SignupPage() {
   };
 
 
+  // This is the code handling the change of the radiop buttons
   const [formBasicUserType, setUserType] = useState('student');
-
   const handleChange = (event) => {setUserType(event.target.value)}
+
+  //Handle the dropdown
+  const [type, setType] = useState("Accounting");
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -156,6 +159,7 @@ export default function SignupPage() {
             </Form.Group>
   */}
 
+{/* Remove the free form text option - PH
             <Form.Group controlId="formBasicMajor">
               <Form.Label>Major</Form.Label>
               <Form.Control
@@ -164,6 +168,38 @@ export default function SignupPage() {
                 placeholder="Enter major"
                 ref={majorRef}
               />
+            </Form.Group>
+*/}
+          
+
+
+            <Form.Group controlId="formBasicMajor">
+              <Form.Label>Select Norm Type</Form.Label>
+              <Form.Control
+                as="select"
+                ref={majorRef}
+                value={type}
+                onChange={e => {
+                  console.log("e.target.value", e.target.value);
+                  setType(e.target.value);
+                }}
+              >
+                <option value="Accounting">Accounting</option>
+                <option value="American Studies">American Studies</option>
+                <option value="Applied Mathematics">Applied Mathematics</option>
+                <option value="Aquatic and Marine Biology">Aquatic and Marine Biology</option>
+                <option value="Art">Art</option>
+                <option value="Biochemistry">Biochemistry</option>
+                <option value="Biology">Biology</option>
+                <option value="Business Administration">Business Administration</option>
+                <option value="Business Systems Analysis">Business Systems Analysis</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Communication and Media Studies">Communication and Media Studies</option>
+                <option value="Computer Information Systems">Computer Information Systems</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="Digital Arts">Digital Arts</option>
+              </Form.Control>
             </Form.Group>
 
             <Button
