@@ -7,10 +7,11 @@ export default function User(props) {
       <Row className="g-4">
         <Col md="8">
           <Card.Body>
-            <Card.Title>{user.name}</Card.Title>
-            <Card.Text>{user.email}</Card.Text>
-            <Card.Text>{user.role}</Card.Text>
-            <Card.Text>{user.major}</Card.Text>
+            <Card.Title>Username: {user.name}</Card.Title>
+            <Card.Text>Email: {user.email}</Card.Text>
+            <Card.Text>Role: {user.role}</Card.Text>
+            <Card.Text>Major: {user.major}</Card.Text>
+            <Card.Text>Interests: {user.interests}</Card.Text>
           </Card.Body>
         </Col>
         <Col md="4">

@@ -22,6 +22,11 @@ const model = mongoose.Schema(
     major: {
       type: String,
       required: true,
+    },
+    interests: {
+      type: String,
+      required: false,
+      default : ""
     }
   },
   { timestamps: true }

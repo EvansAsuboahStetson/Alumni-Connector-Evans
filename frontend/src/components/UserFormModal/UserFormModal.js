@@ -10,6 +10,7 @@ export default function UserFormModal(props) {
   const emailRef = useRef(user?.email);
   const roleRef = useRef(user?.role);
   const majorRef = useRef(user?.major);
+  const interestsRef = useRef(user?.interests);
 
   useEffect(() => {
     if (show) {
@@ -33,6 +34,7 @@ export default function UserFormModal(props) {
       email: emailRef.current.value,
       role: roleRef.current.value,
       major: majorRef.current.value,
+      interests: interestsRef.current.value,
     };
 
     onSubmit(user);
@@ -86,6 +88,16 @@ export default function UserFormModal(props) {
               ref={majorRef}
               defaultValue={user?.major}
               required
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicTextInterests">
+            <Form.Label>Interests</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter interests"
+              ref={interestsRef}
+              defaultValue={user?.interests}
             />
           </Form.Group>
           <Button className="m-2" variant="secondary" onClick={onHide}>
