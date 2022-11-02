@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+
 import { getMatches } from "../../functions/users";
 import { Input } from "antd";
+import User from "../../components/User/User";
 
 const { Search } = Input;
+
 const SearchBar = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [setError] = useState("");
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(null)
   const [datInput,setDatInput] = useState("")
 
   useEffect( () => {
@@ -20,7 +22,7 @@ const SearchBar = () => {
           major: input
         };
         const {data} = await getMatches(token,datum);
-        console.log("I am the response",data)
+
         setData(data);
         setFilteredData(data);
       } catch (err) {
@@ -33,7 +35,7 @@ const SearchBar = () => {
   },[input]);
   
   const handleFilter = (e) => {
-    console.log(e);
+
     const searchInput = e.target.value;
     setInput(searchInput);
     const newFilter = data?.filter((value) => {
@@ -41,6 +43,7 @@ const SearchBar = () => {
     });
     if (searchInput === "") {
       setFilteredData([]);
+      setInput(null)
     } else {
       setFilteredData(newFilter);
     }
@@ -60,7 +63,8 @@ const SearchBar = () => {
           {filteredData.slice(0, 10).map((value, index) => {
             return (
               <div className="dataItem" key={value.id}>
-                <p>{value.first_name} {value.last_name}</p>
+                {console.log("value",value)}
+                <User user={value}/>
               </div>
             );
           })}
