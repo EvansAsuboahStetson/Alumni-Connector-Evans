@@ -10,10 +10,7 @@ export default function UserFormModal(props) {
   const emailRef = useRef(user?.email);
   const roleRef = useRef(user?.role);
   const majorRef = useRef(user?.major);
-
-  //Major dropdown
-  const majorText = user?.major;
-  const [type, setType] = useState(majorText);
+  const interestsRef = useRef(user?.interests);
 
   useEffect(() => {
     if (show) {
@@ -37,6 +34,7 @@ export default function UserFormModal(props) {
       email: emailRef.current.value,
       role: roleRef.current.value,
       major: majorRef.current.value,
+      interests: interestsRef.current.value,
     };
 
     onSubmit(user);
@@ -82,37 +80,6 @@ export default function UserFormModal(props) {
             />
           </Form.Group>
 
-
-          <Form.Group controlId="formBasicMajor">
-              <Form.Label>Select Major</Form.Label>
-              <Form.Control
-                as="select"
-                ref={majorRef}
-                value={type}
-                onChange={e => {
-                  console.log("e.target.value", e.target.value);
-                  setType(e.target.value);
-                }}
-              >
-                <option value="Accounting">Accounting</option>
-                <option value="American Studies">American Studies</option>
-                <option value="Applied Mathematics">Applied Mathematics</option>
-                <option value="Aquatic and Marine Biology">Aquatic and Marine Biology</option>
-                <option value="Art">Art</option>
-                <option value="Biochemistry">Biochemistry</option>
-                <option value="Biology">Biology</option>
-                <option value="Business Administration">Business Administration</option>
-                <option value="Business Systems Analysis">Business Systems Analysis</option>
-                <option value="Chemistry">Chemistry</option>
-                <option value="Communication and Media Studies">Communication and Media Studies</option>
-                <option value="Computer Information Systems">Computer Information Systems</option>
-                <option value="Computer Science">Computer Science</option>
-                <option value="Cybersecurity">Cybersecurity</option>
-                <option value="Digital Arts">Digital Arts</option>
-              </Form.Control>
-            </Form.Group>
-
-{/*}
           <Form.Group controlId="formBasicTextMajor">
             <Form.Label>Major</Form.Label>
             <Form.Control
@@ -123,8 +90,16 @@ export default function UserFormModal(props) {
               required
             />
           </Form.Group>
-  */}
 
+          <Form.Group controlId="formBasicTextInterests">
+            <Form.Label>Interests</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter interests"
+              ref={interestsRef}
+              defaultValue={user?.interests}
+            />
+          </Form.Group>
           <Button className="m-2" variant="secondary" onClick={onHide}>
             Close
           </Button>

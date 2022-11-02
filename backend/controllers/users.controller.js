@@ -95,6 +95,7 @@ exports.update = (req, res) => {
     {
       name: req.body.name || undefined,
       major: req.body.major || undefined,
+      interests: req.body.interests || undefined
     },
     { new: true }
   )
