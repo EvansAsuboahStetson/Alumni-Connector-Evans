@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./SearchDisplay.css"
 import User from "../../components/User/User";
 import Badge from 'react-bootstrap/Badge';
@@ -6,6 +6,21 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 function SearchDisplay(props) {
     const {filteredData,setFilteredData } = props;
+
+    const [seeAllData,setSeeAllData]= useState(false)
+
+    useEffect(()=>{
+
+        if (filteredData?.length>7)
+        {
+            console.log("Yo you are in")
+            setSeeAllData(true)
+        }
+        else{
+            setSeeAllData(false)
+        }
+
+    },[filteredData])
 
 
     
@@ -18,7 +33,7 @@ function SearchDisplay(props) {
         
         <ListGroup className="dataResult" >
            
-          {filteredData?.slice(0, 10).map((value, index) => {
+          {filteredData?.slice(0, 6).map((value, index) => {
             return (
               
               <div className="dataItem" key={value.id}>
@@ -40,6 +55,12 @@ function SearchDisplay(props) {
           })}
         </ListGroup>
       )}
+     {seeAllData==true &&
+     <div className='seeAll'>
+            <div className="badge bg-primary text-wrap" style={{width: "6rem"}}>See More</div>
+     </div>
+   
+      }
     </div>
   )
 }
