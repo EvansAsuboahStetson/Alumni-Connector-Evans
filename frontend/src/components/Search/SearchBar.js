@@ -2,16 +2,23 @@ import { useState, useEffect } from "react";
 
 import { getMatches } from "../../functions/users";
 import { Input } from "antd";
-import User from "../../components/User/User";
+
+import "./SearchDisplay.css"
+import SearchDisplay from "./SearchDisplay";
 
 const { Search } = Input;
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const [data, setData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
+
   const [setError] = useState("");
   const [input, setInput] = useState(null)
   const [datInput,setDatInput] = useState("")
+  const {filteredData,setFilteredData } = props;
+
+  console.log(props,"Here")
+
+
 
   useEffect( () => {
     const token = localStorage.getItem("token");
@@ -49,6 +56,9 @@ const SearchBar = () => {
     }
   };
   return (
+    <div>
+
+
     <div className="search">
       <div className="searchInputs">
         <Search
@@ -58,19 +68,11 @@ const SearchBar = () => {
           enterButton
         />
       </div>
-      {filteredData.length != 0 && (
-        <div className="dataResult">
-          {filteredData.slice(0, 10).map((value, index) => {
-            return (
-              <div className="dataItem" key={value.id}>
-                {console.log("value",value)}
-                <User user={value}/>
-              </div>
-            );
-          })}
-        </div>
-      )}
+    
+
     </div>
+    
+      </div>
   )
 }
 export default SearchBar;

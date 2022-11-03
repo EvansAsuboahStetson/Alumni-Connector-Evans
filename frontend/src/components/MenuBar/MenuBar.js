@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import SearchBar from "../Search/SearchBar";
 
 export default function MenuBar(props) {
-  const { menuItems, routes, bg, variant } = props;
+  const { menuItems, routes, bg, variant,filteredData,setFilteredData } = props;
 
   return (
     <Router>
@@ -24,7 +24,7 @@ export default function MenuBar(props) {
                 })}
               </Nav>
             </Navbar.Collapse>
-            <SearchBar />
+            <SearchBar setFilteredData={setFilteredData} filteredData={filteredData} />
           </Container>
         </Navbar>
       ) : (

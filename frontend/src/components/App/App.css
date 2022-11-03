@@ -2,3 +2,12 @@
   width: 28rem;
   margin: auto;
 }
+
+.app{
+  display: flex;
+  flex-direction: column;
+}
+.apps{
+  display: flex;
+  flex-direction: row;
+}

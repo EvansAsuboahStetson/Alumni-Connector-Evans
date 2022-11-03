@@ -11,6 +11,8 @@ import ProfilePage from "../../pages/Main/ProfilePage";
 import Matches from "../../pages/Main/Matches";
 
 import Majorpage from "../../pages/Main/MajorPage";
+import SearchDisplay from "../Search/SearchDisplay";
+import { useState } from "react";
 
 
 function getMenuItems(user) {
@@ -55,14 +57,25 @@ function Logout() {
 }
 
 function App() {
+  const [filteredData, setFilteredData] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
   return (
+    <div className="app">
+
+    
+    <div className="pi">
     <MenuBar
       menuItems={getMenuItems(user)}
       routes={getRoutes(user)}
       bg={"dark"}
       variant={"dark"}
+      setFilteredData={setFilteredData}
+      filteredData={filteredData}
     />
+    <SearchDisplay setFilteredData={setFilteredData}  filteredData={filteredData}/>
+
+     </div>
+     </div>
   );
 }
 
