@@ -1,0 +1,8 @@
+.conty{
+    width: 80rem;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
