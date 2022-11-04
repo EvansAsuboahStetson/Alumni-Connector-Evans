@@ -8,11 +8,13 @@ import UsersPage from "../../pages/Main/UsersPage";
 import UserEventsPage from "../../pages/Main/UserEventsPage";
 import ProfilePage from "../../pages/Main/ProfilePage";
 
+import { BrowserRouter as Router} from "react-router-dom";
 import Matches from "../../pages/Main/Matches";
 
 import Majorpage from "../../pages/Main/MajorPage";
 import SearchDisplay from "../Search/SearchDisplay";
 import { useState } from "react";
+import ViewUser from "../ViewUser/ViewUser";
 
 
 function getMenuItems(user) {
@@ -45,6 +47,7 @@ function getRoutes(user) {
     { path: "/logout", component: Logout, exact: true },
 
     {path:"/matches",component: Matches,exact:true},
+    {path:"/user/userView",component:ViewUser,exact:true},
 
     { path: "/majorpage", component: Majorpage, exact: true},
 
@@ -60,6 +63,7 @@ function App() {
   const [filteredData, setFilteredData] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
   return (
+    <Router>
     <div className="app">
 
     
@@ -76,6 +80,7 @@ function App() {
 
      </div>
      </div>
+     </Router>
   );
 }
 
