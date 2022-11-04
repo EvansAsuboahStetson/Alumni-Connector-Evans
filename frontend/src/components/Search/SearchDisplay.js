@@ -40,6 +40,7 @@ function SearchDisplay(props) {
             return (
               <div className="dataItem" key={value.id}>
                 {console.log("value", value)}
+                
                 <ListGroup.Item
                   as="li"
                   className="d-flex justify-content-between align-items-start"
