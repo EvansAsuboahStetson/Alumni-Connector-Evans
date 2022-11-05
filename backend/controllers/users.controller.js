@@ -13,9 +13,10 @@ exports.findAll = (req, res) => {
 //find the matches
 
 exports.findMatches = (req, res) => {
-  console.log(req.user.role)
+  
   var userId = 0
-  var major = req.body.major
+  var major = req.body.name
+  console.log(req.body)
 
   if (req.user.role=="admin")
   {
@@ -33,7 +34,7 @@ exports.findMatches = (req, res) => {
     });
   }
   User.find({
-    major: {$regex :new RegExp(major,'i')},
+    name: {$regex :new RegExp(major,'i')},
     _id: { $ne: userId },
     role:{$ne:"admin"}
   })
