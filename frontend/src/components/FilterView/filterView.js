@@ -4,6 +4,7 @@ import "../ViewUser/ViewUser"
 
 import { Row, Col } from "react-bootstrap";
 import User from '../User/User';
+import "./filterView.css"
 
 function FilterView(props) {
     const user = props?.history?.location?.state
@@ -19,7 +20,7 @@ function FilterView(props) {
 
     console.log(user, "users.ksk")
     return (
-        <div>
+        <div className='filterView'>
             {userFull ? <Row xs={3} md={3} className="g-5">
                 {user?.map((use) => (
                     <Col key={use._id} >
