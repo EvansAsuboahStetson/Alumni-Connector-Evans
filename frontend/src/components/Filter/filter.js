@@ -86,15 +86,21 @@ function Filter() {
                         <option value="Computer Science">Computer Science</option>
                         <option value="Psychology">Psychology</option>
                         <option value="Data Analytics">Data Analytics</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
+                        <option value="Digital Arts">Digital Arts</option>
+                        <option value="American Studies">American Studies</option>
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formMinor" >
                     <Form.Label>Minor</Form.Label>
                     <Form.Select aria-label="Default select example"  onChange={(e) => setMinor(e.target.value)}>
-                        <option value="">Select Minor</option>
-                        <option value="Computer Science">Computer Science</option>
+                    <option value="">Select Minor</option>
+                    <option value="Computer Science">Computer Science</option>
                         <option value="Psychology">Psychology</option>
                         <option value="Data Analytics">Data Analytics</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
+                        <option value="Digital Arts">Digital Arts</option>
+                        <option value="American Studies">American Studies</option>
                     </Form.Select>
                 </Form.Group>
 

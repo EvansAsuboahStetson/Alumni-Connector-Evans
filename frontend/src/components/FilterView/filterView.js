@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "../ViewUser/ViewUser"
 
 
@@ -7,19 +7,35 @@ import User from '../User/User';
 
 function FilterView(props) {
     const user = props?.history?.location?.state
+    const [userFull, setUserFull] = useState(false)
 
-    console.log(user)
+    useEffect(() => {
+        if (user.length > 0) {
+            setUserFull(true)
+        }
+
+
+    }, [])
+
+    console.log(user, "users.ksk")
     return (
-        <Row xs={1} md={3} className="g-5">
-        {user?.map((use) => (
-          <Col key={use._id}>
-            <User
-              user={use}
+        <div>
+            {userFull ? <Row xs={3} md={3} className="g-5">
+                {user?.map((use) => (
+                    <Col key={use._id} >
+                        <User
+                            user={use}
 
-            />
-          </Col>
-        ))}
-      </Row>
+                        />
+                    </Col>
+                ))}
+            </Row> : <h1>
+                
+                No User matches description
+                </h1>}
+
+
+        </div>
     )
 }
 
