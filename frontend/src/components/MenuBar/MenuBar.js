@@ -1,14 +1,17 @@
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link,withRouter } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import SearchBar from "../Search/SearchBar";
 
-export default function MenuBar(props) {
-  const { menuItems, routes, bg, variant } = props;
+const MenuBar = (props) => {
+  const { menuItems, routes, bg, variant,filteredData,setFilteredData } = props;
 
   return (
-    <Router>
+    <div>
+
+  
+   
       {menuItems && menuItems.length ? (
         <Navbar bg={bg || "dark"} variant={variant || "dark"} expand="md">
           <Container>
@@ -24,7 +27,7 @@ export default function MenuBar(props) {
                 })}
               </Nav>
             </Navbar.Collapse>
-            <SearchBar />
+            <SearchBar setFilteredData={setFilteredData} filteredData={filteredData} />
           </Container>
         </Navbar>
       ) : (
@@ -43,6 +46,9 @@ export default function MenuBar(props) {
           );
         })}
       </Switch>
-    </Router>
+      </div>
+   
   );
 }
+
+export default MenuBar
