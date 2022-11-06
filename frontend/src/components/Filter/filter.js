@@ -4,6 +4,7 @@ import "./filter.css";
 import Select from "react-select";
 import { useEffect, useState } from "react";
 import { getFilter } from "../../functions/users";
+import { useHistory } from "react-router-dom";
 
 
 function Filter() {
@@ -21,6 +22,7 @@ function Filter() {
     const [minor,setMinor]= useState(null)
     const [major,setMajor] = useState(null)
     
+    let history = useHistory();
     const handleChange = (e) => {
       setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
     }
@@ -47,8 +49,13 @@ function Filter() {
               interests: selectedValue
             };
          
-            const send = await getFilter(token,datum);
-            console.log(send)
+            const {data} = await getFilter(token,datum);
+            console.log(data)
+
+            history.push({
+                pathname: "/user/filter",
+                state: data
+              });
           
     
           

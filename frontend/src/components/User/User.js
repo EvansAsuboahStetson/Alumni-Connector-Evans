@@ -8,7 +8,7 @@ export default function User(props) {
       <Row className="g-4">
         <Col md="8">
           <Card.Body>
-            <Card.Title>Username: {user.name}</Card.Title>
+            <Card.Title>Name: {user.name}</Card.Title>
             <Card.Text>Email: {user.email}</Card.Text>
             <Card.Text>Role: {user.role}</Card.Text>
             <Card.Text>Major: {user.major}</Card.Text>

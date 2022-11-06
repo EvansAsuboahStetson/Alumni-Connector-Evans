@@ -10,6 +10,132 @@ exports.findAll = (req, res) => {
     );
 };
 
+exports.filter = (req, res) => {
+  console.log("This is interests",req.body.interests)
+  const interests  = req.body.interests
+  const major =  req.body.major
+  const minor =  req.body.minor
+  const id =  req.user._id
+
+  console.log(interests,"PPPP")
+
+  var data = {}
+
+  if (major==null && minor ==null && interests.length==0)
+  {
+    console.log("Major: null, Minor: null, Int==0")
+    data = {}
+  }
+  else if(major!=null && minor !=null && interests.length>0)
+  {
+    console.log("Major: Full, Minor: Full, Int>0")
+    data ={
+      interests: { $all: interests},
+      _id: { $ne: id },
+      role:{$ne:"admin"}
+    }
+  }
+  else if(major!=null && minor==null && interests.length==0)
+  {
+    console.log("Major: Full, Minor: Null, Int==0")
+    data = {
+      major: major,
+      _id: { $ne: id },
+      role:{$ne:"admin"}
+
+    }
+  }
+
+
+
+  else if(major!=null && minor!=null && interests.length==0)
+  {
+    console.log("Major: Full, Minor: Full, Int==0")
+    data = {
+      major: major,
+      minor: minor,
+      _id: { $ne: id },
+      role:{$ne:"admin"}
+
+    }
+  }
+
+  else if(major==null && minor==null && interests.length>0)
+  {
+    console.log("Major: Null, Minor: Null, Int>0")
+    data = {
+     
+      interests: { $all: interests},
+      _id: { $ne: id },
+      role:{$ne:"admin"}
+
+    }
+  }
+  else if(major==null && minor!=null && interests.length>0)
+  {
+    console.log("Major: Null, Minor: Full, Int>0")
+    data = {
+
+     minor:minor,
+      interests: { $all: interests},
+      _id: { $ne: id },
+      role:{$ne:"admin"}
+
+    }
+  }
+  else if(major==null && minor!=null && interests.length==0)
+  {
+    console.log("Major: Null, Minor: Full, Int==0")
+    data = {
+
+     minor:minor,
+      _id: { $ne: id },
+      role:{$ne:"admin"}
+
+    }
+  }
+  else if(major!=null && minor==null && interests.length>0)
+  {
+    console.log("Major: Full, Minor: Null, Int>0")
+    data = {
+
+     major:major,
+     interests: { $all: interests},
+      _id: { $ne: id },
+      role:{$ne:"admin"}
+
+    }
+  }
+  console.log(data)
+
+  
+  
+
+  User.find(data)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({
+          message: "User not found",
+        });
+      }
+      console.log(user)
+      res.send(user);
+    })
+    .catch((error) => {
+      if (error.kind === "ObjectId") {
+        return res.status(404).send({
+          message: "User not found.",
+        });
+      }
+      return res.status(500).send({
+        message: "Error retrieving user with id " + req.params.userId,
+      });
+    });
+
+
+
+};
+
 //find the matches
 
 exports.findMatches = (req, res) => {
