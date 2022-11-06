@@ -7,6 +7,7 @@ import HomePage from "../../pages/Main/HomePage";
 import UsersPage from "../../pages/Main/UsersPage";
 import UserEventsPage from "../../pages/Main/UserEventsPage";
 import ProfilePage from "../../pages/Main/ProfilePage";
+import Filter from "../Filter/filter"
 
 import { BrowserRouter as Router} from "react-router-dom";
 import Matches from "../../pages/Main/Matches";
@@ -26,6 +27,7 @@ function getMenuItems(user) {
     { name: "Home", link: "/" },
     { name: "User Events", link: `/users/${user._id}/events` },
     { name: "Profile", link: `/users/${user._id}` },
+    {name: "Filter",link:`/search/filter`}
   ];
 
   if (user.role === "admin") {
@@ -50,6 +52,7 @@ function getRoutes(user) {
     {path:"/user/userView",component:ViewUser,exact:true},
 
     { path: "/majorpage", component: Majorpage, exact: true},
+    {path:"/search/filter",component:Filter,exact:true},
 
   ];
 }

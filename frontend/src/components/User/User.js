@@ -2,6 +2,7 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 
 export default function User(props) {
   const { user, onEdit, onDelete, onView } = props;
+  console.log(user.interests,"interests")
   return (
     <Card className="mt-2 mb-2 ml-2 mr-2">
       <Row className="g-4">
@@ -11,7 +12,7 @@ export default function User(props) {
             <Card.Text>Email: {user.email}</Card.Text>
             <Card.Text>Role: {user.role}</Card.Text>
             <Card.Text>Major: {user.major}</Card.Text>
-            <Card.Text>Interests: {user.interests}</Card.Text>
+            <Card.Text>Interests: { user.interests?.map(x => x + " , ")}</Card.Text>
           </Card.Body>
         </Col>
         <Col md="4">
