@@ -12,8 +12,8 @@ export default function UserFormModal(props) {
   const emailRef = useRef(user?.email);
   const roleRef = useRef(user?.role);
   const majorRef = useRef(user?.major);
-  const interestsRef = useRef(user?.interests);
-
+  const minorRef = useRef(user?.minor)
+  
   useEffect(() => {
     if (show) {
       setValidated(false);
@@ -36,6 +36,7 @@ export default function UserFormModal(props) {
       email: emailRef.current.value,
       role: roleRef.current.value,
       major: majorRef.current.value,
+      minor: minorRef.current.value,
       interests: selectedValue,
     };
 
@@ -44,7 +45,9 @@ export default function UserFormModal(props) {
 
   //Major dropdown
   const majorText = user?.major;
+  const minorText = user?.minor;
   const [type, setType] = useState(majorText);
+  const [mtype, setmType] = useState(minorText);
 
   const handleChange = (e) => {
     setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
@@ -118,6 +121,35 @@ export default function UserFormModal(props) {
                 onChange={e => {
                   console.log("e.target.value", e.target.value);
                   setType(e.target.value);
+                }}
+              >
+                <option value="Accounting">Accounting</option>
+                <option value="American Studies">American Studies</option>
+                <option value="Applied Mathematics">Applied Mathematics</option>
+                <option value="Aquatic and Marine Biology">Aquatic and Marine Biology</option>
+                <option value="Art">Art</option>
+                <option value="Biochemistry">Biochemistry</option>
+                <option value="Biology">Biology</option>
+                <option value="Business Administration">Business Administration</option>
+                <option value="Business Systems Analysis">Business Systems Analysis</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Communication and Media Studies">Communication and Media Studies</option>
+                <option value="Computer Information Systems">Computer Information Systems</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="Digital Arts">Digital Arts</option>
+              </Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId="formBasicTextMinor">
+              <Form.Label>Select Minor</Form.Label>
+              <Form.Control
+                as="select"
+                ref={minorRef}
+                value={mtype}
+                onChange={e => {
+                  console.log("e.target.value", e.target.value);
+                  setmType(e.target.value);
                 }}
               >
                 <option value="Accounting">Accounting</option>

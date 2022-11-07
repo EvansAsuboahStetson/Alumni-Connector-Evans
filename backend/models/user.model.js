@@ -23,6 +23,10 @@ const model = mongoose.Schema(
       type: String,
       required: true,
     },
+    minor: {
+      type: String,
+      required: false,
+    },
     interests: {
       type: Array ,
       required: false,
