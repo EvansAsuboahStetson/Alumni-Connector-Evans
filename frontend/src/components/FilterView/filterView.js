@@ -21,7 +21,7 @@ function FilterView(props) {
     console.log(user, "users.ksk")
     return (
         <div className='filterView'>
-            {userFull ? <Row xs={3} md={3} className="g-5">
+            {userFull ? <Row xs={1} md={2} lg={3} className="g-5">
                 {user?.map((use) => (
                     <Col key={use._id} >
                         <User
