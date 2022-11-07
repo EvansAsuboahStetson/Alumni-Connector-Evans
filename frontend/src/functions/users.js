@@ -35,6 +35,17 @@ export const getMatches = async ( token, credentials) => {
     },
   });
 };
+export const getFilter = async ( token, credentials) => {
+  console.log("getMatches",credentials)
+  return axios({
+    method: "POST",
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.FILTER}`,
+    data: credentials,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 // Function to update user
 export const updateUser = async (userId, data, token) => {

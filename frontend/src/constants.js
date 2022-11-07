@@ -6,7 +6,8 @@ exports.constants = {
       SIGNUP: "/api/auth/signup",
       USERS: "/api/users",
       EVENTS: "/api/events",
-      MATCHES:"/api/user/matches"
+      MATCHES:"/api/user/matches",
+      FILTER:"/api/user/filter"
     },
   },
 };
