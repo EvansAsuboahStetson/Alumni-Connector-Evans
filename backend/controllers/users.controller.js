@@ -24,7 +24,7 @@ exports.filter = (req, res) => {
   if (major==null && minor ==null && interests.length==0)
   {
     console.log("Major: null, Minor: null, Int==0")
-    data = {}
+    data = { role:{$ne:"admin"}}
   }
   else if(major!=null && minor !=null && interests.length>0)
   {
