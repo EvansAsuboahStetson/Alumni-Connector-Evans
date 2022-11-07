@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "../ViewUser/ViewUser"
 
 
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import User from '../User/User';
 import "./filterView.css"
 
@@ -22,14 +22,18 @@ function FilterView(props) {
     return (
         <div className='filterView'>
             {userFull ? <Row xs={1} md={2} lg={3} className="g-5">
+                
                 {user?.map((use) => (
                     <Col key={use._id} >
+
                         <User
                             user={use}
 
                         />
+                        <Button variant="primary">Add to Contact</Button>
                     </Col>
                 ))}
+                
             </Row> : <h1>
                 
                 No User matches description
