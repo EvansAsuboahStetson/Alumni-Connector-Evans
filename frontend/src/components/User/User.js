@@ -12,6 +12,7 @@ export default function User(props) {
             <Card.Text>Email: {user.email}</Card.Text>
             <Card.Text>Role: {user.role}</Card.Text>
             <Card.Text>Major: {user.major}</Card.Text>
+            <Card.Text>Minor: {user.minor}</Card.Text>
             <Card.Text>Interests: { user.interests?.map(x => x + " , ")}</Card.Text>
           </Card.Body>
         </Col>
