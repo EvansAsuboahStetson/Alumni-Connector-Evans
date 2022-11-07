@@ -1,10 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import Select from "react-select";
 
 // Show modal to create or edit user
 export default function UserFormModal(props) {
   const [validated, setValidated] = useState();
   const { show, onHide, title, user, onSubmit } = props;
+  const [selectedValue, setSelectedValue] = useState([]);
 
   const nameRef = useRef(user?.name);
   const emailRef = useRef(user?.email);
@@ -34,11 +36,34 @@ export default function UserFormModal(props) {
       email: emailRef.current.value,
       role: roleRef.current.value,
       major: majorRef.current.value,
-      interests: interestsRef.current.value,
+      interests: selectedValue,
     };
 
     onSubmit(user);
   };
+
+  const handleChange = (e) => {
+    setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
+  }
+
+  const customStyles = {
+      option: (provided, state) => ({
+        ...provided,
+        color: state.isSelected ? 'red' : 'black',
+        padding: 5,
+      })
+  }
+  const colourOptions = [
+    { value: "Artificial Intelligence", label: "Artificial Intelligence" },
+    { value: "Product Management", label: "Product Management" },
+    { value: "Mental Health", label: "Mental Health" },
+    { value: "Physics", label: "Physics" },
+    { value: "Statistics", label: "Statistics" },
+    { value: "Technology", label: "Technology" },
+    { value: "Finance", label: "Finance" },
+
+];
+
 
   return (
     <Modal show={show} onHide={onHide}>
@@ -91,15 +116,24 @@ export default function UserFormModal(props) {
             />
           </Form.Group>
 
-          <Form.Group controlId="formBasicTextInterests">
-            <Form.Label>Interests</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter interests"
-              ref={interestsRef}
-              defaultValue={user?.interests}
-            />
-          </Form.Group>
+        
+
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Interests</Form.Label>
+                    <Select
+                        isMulti
+                        name="colors"
+                        options={colourOptions}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        styles={customStyles}
+                        value={colourOptions.filter(obj => selectedValue.includes(obj.value))} // set selected values
+                        onChange={handleChange}
+                     
+                        
+                    />
+                </Form.Group>
           <Button className="m-2" variant="secondary" onClick={onHide}>
             Close
           </Button>

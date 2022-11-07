@@ -24,9 +24,9 @@ const model = mongoose.Schema(
       required: true,
     },
     interests: {
-      type: String,
+      type: Array ,
       required: false,
-      default : ""
+      default : []
     }
   },
   { timestamps: true }

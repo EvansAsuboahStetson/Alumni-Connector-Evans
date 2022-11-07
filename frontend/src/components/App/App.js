@@ -7,6 +7,7 @@ import HomePage from "../../pages/Main/HomePage";
 import UsersPage from "../../pages/Main/UsersPage";
 import UserEventsPage from "../../pages/Main/UserEventsPage";
 import ProfilePage from "../../pages/Main/ProfilePage";
+import Filter from "../Filter/filter"
 
 import { BrowserRouter as Router} from "react-router-dom";
 import Matches from "../../pages/Main/Matches";
@@ -15,6 +16,8 @@ import Majorpage from "../../pages/Main/MajorPage";
 import SearchDisplay from "../Search/SearchDisplay";
 import { useState } from "react";
 import ViewUser from "../ViewUser/ViewUser";
+
+import FilterView from "../FilterView/filterView";
 
 
 function getMenuItems(user) {
@@ -26,6 +29,8 @@ function getMenuItems(user) {
     { name: "Home", link: "/" },
     { name: "User Events", link: `/users/${user._id}/events` },
     { name: "Profile", link: `/users/${user._id}` },
+    {name: "Filter",link:`/search/filter`},
+    
   ];
 
   if (user.role === "admin") {
@@ -44,12 +49,13 @@ function getRoutes(user) {
     { path: "/users/:userId/events", component: UserEventsPage, exact: true },
     { path: "/users/:userId", component: ProfilePage, exact: true },
     { path: "/users", component: UsersPage, exact: true },
-    { path: "/logout", component: Logout, exact: true },
-
+    { path: "/logout", component: Logout, exact: true },   
+     { path: "/user/filter", component: FilterView, exact: true },
     {path:"/matches",component: Matches,exact:true},
     {path:"/user/userView",component:ViewUser,exact:true},
 
     { path: "/majorpage", component: Majorpage, exact: true},
+    {path:"/search/filter",component:Filter,exact:true},
 
   ];
 }

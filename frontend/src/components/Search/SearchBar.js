@@ -26,7 +26,7 @@ const SearchBar = (props) => {
     const fetcMatches = async()=>{
       try {
         const datum = {
-          major: input
+          name: input
         };
         const {data} = await getMatches(token,datum);
 
@@ -57,12 +57,10 @@ const SearchBar = (props) => {
   };
   return (
     <div>
-
-
     <div className="search">
       <div className="searchInputs">
         <Search
-          placeholder="Search for majors..."
+          placeholder="Search for name..."
           value={input}
           onChange={(e) => handleFilter(e)}
           enterButton

@@ -17,6 +17,13 @@ router.post(
   middleware.allowAdmin,
   usersController.findMatches
 );
+router.post(
+  "/user/filter",
+  middleware.verify,
+  usersController.filter
+);
+
+
 //user to retrieve their own matches
 router.post(
   "/user/matches",
