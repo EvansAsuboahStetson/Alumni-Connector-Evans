@@ -60,7 +60,8 @@ export default function UserFormModal(props) {
     { value: "Physics", label: "Physics" },
     { value: "Statistics", label: "Statistics" },
     { value: "Technology", label: "Technology" },
-    
+    { value: "Finance", label: "Finance" },
+
 ];
 
 

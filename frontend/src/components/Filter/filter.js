@@ -15,6 +15,8 @@ function Filter() {
         { value: "Physics", label: "Physics" },
         { value: "Statistics", label: "Statistics" },
         { value: "Technology", label: "Technology" },
+        { value: "Finance", label: "Finance" },
+
         
     ];
     const [selectedValue, setSelectedValue] = useState([]);
