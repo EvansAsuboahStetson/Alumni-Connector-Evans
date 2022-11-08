@@ -31,6 +31,11 @@ const model = mongoose.Schema(
       type: Array ,
       required: false,
       default : []
+    },
+    profilePic: {
+      type: String,
+      required: false,
+      default : "/images/default.png"
     }
   },
   { timestamps: true }

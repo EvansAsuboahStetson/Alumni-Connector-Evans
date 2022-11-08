@@ -12,7 +12,8 @@ export default function UserFormModal(props) {
   const emailRef = useRef(user?.email);
   const roleRef = useRef(user?.role);
   const majorRef = useRef(user?.major);
-  const minorRef = useRef(user?.minor)
+  const minorRef = useRef(user?.minor);
+  const profilePicRef = useRef(user?.profilePic);
   
   useEffect(() => {
     if (show) {
@@ -38,6 +39,7 @@ export default function UserFormModal(props) {
       major: majorRef.current.value,
       minor: minorRef.current.value,
       interests: selectedValue,
+      profilePic: profilePicRef.current.value,
     };
 
     onSubmit(user);
@@ -118,6 +120,7 @@ export default function UserFormModal(props) {
                 as="select"
                 ref={majorRef}
                 value={type}
+                defaultValue={user?.major}
                 onChange={e => {
                   console.log("e.target.value", e.target.value);
                   setType(e.target.value);
@@ -147,6 +150,7 @@ export default function UserFormModal(props) {
                 as="select"
                 ref={minorRef}
                 value={mtype}
+                defaultValue={user?.minor}
                 onChange={e => {
                   console.log("e.target.value", e.target.value);
                   setmType(e.target.value);
@@ -184,10 +188,19 @@ export default function UserFormModal(props) {
                         styles={customStyles}
                         value={colourOptions.filter(obj => selectedValue.includes(obj.value))} // set selected values
                         onChange={handleChange}
-                     
                         
                     />
                 </Form.Group>
+
+                <Form.Group controlId="formBasicTextProfilepic">
+            <Form.Label>Profile Pic</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter image link"
+              ref={profilePicRef}
+              defaultValue={user?.profilePic}
+            />
+          </Form.Group>
           <Button className="m-2" variant="secondary" onClick={onHide}>
             Close
           </Button>

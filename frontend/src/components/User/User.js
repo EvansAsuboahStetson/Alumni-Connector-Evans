@@ -5,6 +5,13 @@ export default function User(props) {
   console.log(user.interests,"interests")
   return (
     <Card className="mt-2 mb-2 ml-2 mr-2">
+      <Row className="g-3">
+        <Col md="7">
+          <Card.Body>
+            <img src={user.profilePic} alt="user" style={{height: '200px', width : '400px'}} onClick={() => onEdit(user)} />
+          </Card.Body>
+        </Col>
+      </Row>
       <Row className="g-4">
         <Col md="8">
           <Card.Body>
@@ -13,7 +20,7 @@ export default function User(props) {
             <Card.Text>Role: {user.role}</Card.Text>
             <Card.Text>Major: {user.major}</Card.Text>
             <Card.Text>Minor: {user.minor}</Card.Text>
-            <Card.Text>Interests: { user.interests?.map(x => x + " , ")}</Card.Text>
+            <Card.Text>Interests: { user.interests?.map(x => x + ", ")}</Card.Text>
           </Card.Body>
         </Col>
         <Col md="4">
