@@ -74,8 +74,38 @@ export default function UserFormModal(props) {
 ];
 
 
+
+
+const inputRef = useRef(null);
+
+const handleClick = () => {
+  // 👇️ open file input box on click of other element
+  inputRef.current.click();
+};
+
+const handleFileChange = event => {
+  const fileObj = event.target.files && event.target.files[0];
+  if (!fileObj) {
+    return;
+  }
+
+  console.log('fileObj is', fileObj);
+
+  // 👇️ reset file input
+
+
+  // 👇️ is now empty
+  console.log(event.target.files);
+
+  // 👇️ can still access file object here
+  console.log(fileObj);
+  console.log(fileObj.name);
+};
+
+
   return (
     <Modal show={show} onHide={onHide}>
+      
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
@@ -102,6 +132,11 @@ export default function UserFormModal(props) {
               disabled
             />
           </Form.Group>
+          <div>
+ 
+
+
+    </div>
 
           <Form.Group controlId="formBasicTextEmail">
             <Form.Label>Role</Form.Label>
@@ -200,14 +235,25 @@ export default function UserFormModal(props) {
               ref={profilePicRef}
               defaultValue={user?.profilePic}
             />
+          <Form.Label>Upload Profile Pic</Form.Label>
+            <Form.Control
+             ref={inputRef}
+            type="file"
+            onChange={handleFileChange}
+            defaultValue=""/>
+             
           </Form.Group>
+       
+       
           <Button className="m-2" variant="secondary" onClick={onHide}>
             Close
           </Button>
           <Button className="m-2" type="submit" variant="success">
             Submit
           </Button>
+          
         </Form>
+        
       </Modal.Body>
     </Modal>
   );

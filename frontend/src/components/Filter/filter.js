@@ -23,6 +23,20 @@ function Filter() {
  
     const [minor,setMinor]= useState(null)
     const [major,setMajor] = useState(null)
+
+    const [item, setItem] = useState({ kindOfStand: "", another: "another" });
+
+    const { kindOfStand } = item;
+  
+    const handleChanges = e => {
+      e.persist();
+      console.log(e.target.value);
+  
+      setItem(prevState => ({
+        ...prevState,
+        kindOfStand: e.target.value
+      }));
+    };
     
     let history = useHistory();
     const handleChange = (e) => {
@@ -43,12 +57,14 @@ function Filter() {
         console.log(minor)
         console.log(selectedValue)
         const token = localStorage.getItem("token");
+        console.log("sub-item",item)
 
         try {
             const datum = {
               major: major,
               minor:minor,
-              interests: selectedValue
+              interests: selectedValue,
+              role:item
             };
          
             const {data} = await getFilter(token,datum);
@@ -80,17 +96,27 @@ function Filter() {
 
     return (
         <div className="Filtcontainer">
-            <Form className="p-3 mb-2 bg-dark text-white">
+            <Form className="p-3 mb-2 bg-white text-black">
                 <Form.Group className="mb-3" controlId="form">
                     <Form.Label>Major</Form.Label>
                     <Form.Select aria-label="Default select example" onChange={(e) => setMajor(e.target.value)}>
+                    
                         <option value="">Select Major</option>
-                        <option value="Computer Science">Computer Science</option>
-                        <option value="Psychology">Psychology</option>
-                        <option value="Data Analytics">Data Analytics</option>
-                        <option value="Cybersecurity">Cybersecurity</option>
-                        <option value="Digital Arts">Digital Arts</option>
-                        <option value="American Studies">American Studies</option>
+                        <option value="Accounting">Accounting</option>
+                <option value="American Studies">American Studies</option>
+                <option value="Applied Mathematics">Applied Mathematics</option>
+                <option value="Aquatic and Marine Biology">Aquatic and Marine Biology</option>
+                <option value="Art">Art</option>
+                <option value="Biochemistry">Biochemistry</option>
+                <option value="Biology">Biology</option>
+                <option value="Business Administration">Business Administration</option>
+                <option value="Business Systems Analysis">Business Systems Analysis</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Communication and Media Studies">Communication and Media Studies</option>
+                <option value="Computer Information Systems">Computer Information Systems</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="Digital Arts">Digital Arts</option>
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formMinor" >
@@ -98,11 +124,21 @@ function Filter() {
                     <Form.Select aria-label="Default select example"  onChange={(e) => setMinor(e.target.value)}>
                     <option value="">Select Minor</option>
                     <option value="Computer Science">Computer Science</option>
-                        <option value="Psychology">Psychology</option>
-                        <option value="Data Analytics">Data Analytics</option>
-                        <option value="Cybersecurity">Cybersecurity</option>
-                        <option value="Digital Arts">Digital Arts</option>
-                        <option value="American Studies">American Studies</option>
+                    <option value="Accounting">Accounting</option>
+                <option value="American Studies">American Studies</option>
+                <option value="Applied Mathematics">Applied Mathematics</option>
+                <option value="Aquatic and Marine Biology">Aquatic and Marine Biology</option>
+                <option value="Art">Art</option>
+                <option value="Biochemistry">Biochemistry</option>
+                <option value="Biology">Biology</option>
+                <option value="Business Administration">Business Administration</option>
+                <option value="Business Systems Analysis">Business Systems Analysis</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Communication and Media Studies">Communication and Media Studies</option>
+                <option value="Computer Information Systems">Computer Information Systems</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="Digital Arts">Digital Arts</option>
                     </Form.Select>
                 </Form.Group>
 
@@ -122,7 +158,22 @@ function Filter() {
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
+                <Form.Check
+          value="student"
+          type="radio"
+          aria-label="radio 1"
+          label="Student"
+          onChange={handleChanges}
+          checked={kindOfStand === "student"}
+        />
+        <Form.Check
+          value="alumni"
+          type="radio"
+          aria-label="radio 2"
+          label="Alumni"
+          onChange={handleChanges}
+          checked={kindOfStand === "alumni"}
+        />
                 </Form.Group>
                 <Button variant="primary"  onClick={submit}>
                     Submit

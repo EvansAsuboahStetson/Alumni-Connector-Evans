@@ -1,0 +1,12 @@
+.edit{
+    display: flex;
+    flex-direction: column;
+    
+    overflow:hidden;
+    
+}
+.edit-values{
+  
+margin-bottom:10px;
+
+}
