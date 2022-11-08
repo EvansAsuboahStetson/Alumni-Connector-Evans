@@ -16,15 +16,16 @@ exports.filter = (req, res) => {
   const major =  req.body.major
   const minor =  req.body.minor
   const id =  req.user._id
+  const role = req.body.role.kindOfStand
 
-  console.log(interests,"PPPP")
+  console.log(role,"PPPP")
 
   var data = {}
 
   if (major==null && minor ==null && interests.length==0)
   {
     console.log("Major: null, Minor: null, Int==0")
-    data = { role:{$ne:"admin"}}
+    data = { role:{$ne:"admin"}, _id: { $ne: id }}
   }
   else if(major!=null && minor !=null && interests.length>0)
   {
@@ -55,7 +56,8 @@ exports.filter = (req, res) => {
       major: major,
       minor: minor,
       _id: { $ne: id },
-      role:{$ne:"admin"}
+      role:{$ne:"admin"},
+      
 
     }
   }
@@ -105,6 +107,23 @@ exports.filter = (req, res) => {
       role:{$ne:"admin"}
 
     }
+  }
+
+  if (role=="")
+  {
+   
+  }
+  else{
+    console.log("I am not empty")
+    var value=""
+    if (role=="student")
+    {
+      value="alumni"
+    }
+    else{
+      value="student"
+    }
+    data["role"] =  { '$nin':  ["admin",value] }
   }
   console.log(data)
 
