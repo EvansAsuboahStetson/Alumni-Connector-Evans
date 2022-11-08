@@ -8,7 +8,7 @@ function ViewUser(props) {
   return (
     <div className="conty">
     <Card style={{ width: '18rem' }}>
-      <Card.Img  style={{ width: '18rem' , height:'17rem'}} variant="top" src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" />
+      <Card.Img  style={{ width: '18rem' , height:'17rem'}} variant="top" src={user.profilePic} />
       <Card.Body>
         <Card.Title>{user.name}</Card.Title>
         <Card.Text>
@@ -18,10 +18,13 @@ function ViewUser(props) {
           Major: {user.major}
         </Card.Text>
         <Card.Text>
+          Minor: {user.minor}
+        </Card.Text>
+        <Card.Text>
           Role: {user.role}
         </Card.Text>
         <Card.Text>
-          Interest: {user?.interests}
+          Interest: {user.interests?.map(x => x + ", ")}
         </Card.Text>
         <Button variant="primary">Send Email</Button>
       </Card.Body>

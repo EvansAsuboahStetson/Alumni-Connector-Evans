@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Spinner } from "react-bootstrap";
+import { Container, Spinner, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import User from "../../components/User/User";
 import { getUser, updateUser } from "../../functions/users";
