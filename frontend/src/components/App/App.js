@@ -13,7 +13,7 @@ import { BrowserRouter as Router} from "react-router-dom";
 import Matches from "../../pages/Main/Matches";
 
 import Majorpage from "../../pages/Main/MajorPage";
-import SearchDisplay from "../Search/SearchDisplay";
+//import SearchDisplay from "../Search/SearchDisplay";
 import { useState } from "react";
 import ViewUser from "../ViewUser/ViewUser";
 
@@ -82,7 +82,9 @@ function App() {
       setFilteredData={setFilteredData}
       filteredData={filteredData}
     />
+    {/*
     <SearchDisplay setFilteredData={setFilteredData}  filteredData={filteredData}/>
+  */}
 
      </div>
      </div>
