@@ -100,45 +100,43 @@ function Filter() {
                 <Form.Group className="mb-3" controlId="form">
                     <Form.Label>Major</Form.Label>
                     <Form.Select aria-label="Default select example" onChange={(e) => setMajor(e.target.value)}>
-                    
-                        <option value="">Select Major</option>
-                        <option value="Accounting">Accounting</option>
-                <option value="American Studies">American Studies</option>
-                <option value="Applied Mathematics">Applied Mathematics</option>
-                <option value="Aquatic and Marine Biology">Aquatic and Marine Biology</option>
-                <option value="Art">Art</option>
-                <option value="Biochemistry">Biochemistry</option>
-                <option value="Biology">Biology</option>
-                <option value="Business Administration">Business Administration</option>
-                <option value="Business Systems Analysis">Business Systems Analysis</option>
-                <option value="Chemistry">Chemistry</option>
-                <option value="Communication and Media Studies">Communication and Media Studies</option>
-                <option value="Computer Information Systems">Computer Information Systems</option>
-                <option value="Computer Science">Computer Science</option>
-                <option value="Cybersecurity">Cybersecurity</option>
-                <option value="Digital Arts">Digital Arts</option>
+                    <option value="">Select Major</option>
+                    <option value="Accounting">Accounting</option>
+                    <option value="American Studies">American Studies</option>
+                    <option value="Applied Mathematics">Applied Mathematics</option>
+                    <option value="Aquatic and Marine Biology">Aquatic and Marine Biology</option>
+                    <option value="Art">Art</option>
+                    <option value="Biochemistry">Biochemistry</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Business Administration">Business Administration</option>
+                    <option value="Business Systems Analysis">Business Systems Analysis</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Communication and Media Studies">Communication and Media Studies</option>
+                    <option value="Computer Information Systems">Computer Information Systems</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Cybersecurity">Cybersecurity</option>
+                    <option value="Digital Arts">Digital Arts</option>
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formMinor" >
                     <Form.Label>Minor</Form.Label>
                     <Form.Select aria-label="Default select example"  onChange={(e) => setMinor(e.target.value)}>
                     <option value="">Select Minor</option>
-                    <option value="Computer Science">Computer Science</option>
                     <option value="Accounting">Accounting</option>
-                <option value="American Studies">American Studies</option>
-                <option value="Applied Mathematics">Applied Mathematics</option>
-                <option value="Aquatic and Marine Biology">Aquatic and Marine Biology</option>
-                <option value="Art">Art</option>
-                <option value="Biochemistry">Biochemistry</option>
-                <option value="Biology">Biology</option>
-                <option value="Business Administration">Business Administration</option>
-                <option value="Business Systems Analysis">Business Systems Analysis</option>
-                <option value="Chemistry">Chemistry</option>
-                <option value="Communication and Media Studies">Communication and Media Studies</option>
-                <option value="Computer Information Systems">Computer Information Systems</option>
-                <option value="Computer Science">Computer Science</option>
-                <option value="Cybersecurity">Cybersecurity</option>
-                <option value="Digital Arts">Digital Arts</option>
+                    <option value="American Studies">American Studies</option>
+                    <option value="Applied Mathematics">Applied Mathematics</option>
+                    <option value="Aquatic and Marine Biology">Aquatic and Marine Biology</option>
+                    <option value="Art">Art</option>
+                    <option value="Biochemistry">Biochemistry</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Business Administration">Business Administration</option>
+                    <option value="Business Systems Analysis">Business Systems Analysis</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Communication and Media Studies">Communication and Media Studies</option>
+                    <option value="Computer Information Systems">Computer Information Systems</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Cybersecurity">Cybersecurity</option>
+                    <option value="Digital Arts">Digital Arts</option>
                     </Form.Select>
                 </Form.Group>
 
