@@ -191,6 +191,7 @@ const handleFileChange = event => {
                   setmType(e.target.value);
                 }}
               >
+                <option value="None">None</option>
                 <option value="Accounting">Accounting</option>
                 <option value="American Studies">American Studies</option>
                 <option value="Applied Mathematics">Applied Mathematics</option>
