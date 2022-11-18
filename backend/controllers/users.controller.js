@@ -9,126 +9,165 @@ exports.findAll = (req, res) => {
       res.status(500).json({ message: err.message || "Internal Server error" })
     );
 };
+exports.pending = (req, res) => {
+  let loggedIn = req.user._id;
+  console.log(loggedIn);
+
+  let user = req.body.id;
+  console.log(user);
+  //#id:user,
+  //pendingFriends:{ $in: [loggedIn ] }
+
+  User.find({ _id: user, pendingFriends: { $in: [loggedIn] } })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({
+          message: "User not found.",
+        });
+      }
+      res.send(user);
+    })
+    .catch((error) => {
+      if (error.kind === "ObjectId" || error.name === "NotFound") {
+        return res.status(404).send({
+          message: "User not found.",
+        });
+      }
+      return res.status(500).send({
+        message: "Could not send request" + user,
+      });
+    });
+};
+exports.connect = (req, res) => {
+  console.log(req.body.id);
+  let loggedIn = req.user._id;
+
+  let user_Id = req.body.id;
+
+  //pendingFriends: { $nin: [loggedIn] },
+  let setTrue= false
+ User.find({_id: user_Id, pendingFriends: { $in: [loggedIn] }}).then((user)=>{
+  let friends= user[0]?.pendingFriends
+  if (friends)
+  {
+    return res.status(200).send({
+      message: "User already friend",
+    });
+  }
+  else{
+    console.log("Undefined")
+    User.findByIdAndUpdate(user_Id,  {
+    
+      $push: { pendingFriends: loggedIn },
+    })
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send({
+            message: "User not found.",
+          });
+        }
+        res.send({ message: "User Updated Already" });
+      })
+      .catch((error) => {
+        if (error.kind === "ObjectId" || error.name === "NotFound") {
+          return res.status(404).send({
+            message: "User not found.",
+          });
+        }
+        return res.status(500).send({
+          message: "Could not delete user with id " + req.params.userId,
+        });
+      });
+  }
+ }).catch((error)=>{
+  console.log(error)
+ })
+
+
+
+};
 
 exports.filter = (req, res) => {
-  console.log("This is interests",req.body.interests)
-  const interests  = req.body.interests
-  const major =  req.body.major
-  const minor =  req.body.minor
-  const id =  req.user._id
-  const role = req.body.role.kindOfStand
+  console.log("This is interests", req.body.interests);
+  const interests = req.body.interests;
+  const major = req.body.major;
+  const minor = req.body.minor;
+  const id = req.user._id;
+  const role = req.body.role.kindOfStand;
 
-  console.log(role,"PPPP")
+  console.log(role, "PPPP");
 
-  var data = {}
+  var data = {};
 
-  if (major==null && minor ==null && interests.length==0)
-  {
-    console.log("Major: null, Minor: null, Int==0")
-    data = { role:{$ne:"admin"}, _id: { $ne: id }}
-  }
-  else if(major!=null && minor !=null && interests.length>0)
-  {
-    console.log("Major: Full, Minor: Full, Int>0")
-    data ={
-      interests: { $all: interests},
+  if (major == null && minor == null && interests.length == 0) {
+    console.log("Major: null, Minor: null, Int==0");
+    data = { role: { $ne: "admin" }, _id: { $ne: id } };
+  } else if (major != null && minor != null && interests.length > 0) {
+    console.log("Major: Full, Minor: Full, Int>0");
+    data = {
+      interests: { $all: interests },
       _id: { $ne: id },
-      role:{$ne:"admin"}
-    }
-  }
-  else if(major!=null && minor==null && interests.length==0)
-  {
-    console.log("Major: Full, Minor: Null, Int==0")
+      role: { $ne: "admin" },
+    };
+  } else if (major != null && minor == null && interests.length == 0) {
+    console.log("Major: Full, Minor: Null, Int==0");
     data = {
       major: major,
       _id: { $ne: id },
-      role:{$ne:"admin"}
-
-    }
-  }
-
-
-
-  else if(major!=null && minor!=null && interests.length==0)
-  {
-    console.log("Major: Full, Minor: Full, Int==0")
+      role: { $ne: "admin" },
+    };
+  } else if (major != null && minor != null && interests.length == 0) {
+    console.log("Major: Full, Minor: Full, Int==0");
     data = {
       major: major,
       minor: minor,
       _id: { $ne: id },
-      role:{$ne:"admin"},
-      
-
-    }
-  }
-
-  else if(major==null && minor==null && interests.length>0)
-  {
-    console.log("Major: Null, Minor: Null, Int>0")
+      role: { $ne: "admin" },
+    };
+  } else if (major == null && minor == null && interests.length > 0) {
+    console.log("Major: Null, Minor: Null, Int>0");
     data = {
-     
-      interests: { $all: interests},
+      interests: { $all: interests },
       _id: { $ne: id },
-      role:{$ne:"admin"}
-
-    }
-  }
-  else if(major==null && minor!=null && interests.length>0)
-  {
-    console.log("Major: Null, Minor: Full, Int>0")
+      role: { $ne: "admin" },
+    };
+  } else if (major == null && minor != null && interests.length > 0) {
+    console.log("Major: Null, Minor: Full, Int>0");
     data = {
-
-     minor:minor,
-      interests: { $all: interests},
+      minor: minor,
+      interests: { $all: interests },
       _id: { $ne: id },
-      role:{$ne:"admin"}
-
-    }
-  }
-  else if(major==null && minor!=null && interests.length==0)
-  {
-    console.log("Major: Null, Minor: Full, Int==0")
+      role: { $ne: "admin" },
+    };
+  } else if (major == null && minor != null && interests.length == 0) {
+    console.log("Major: Null, Minor: Full, Int==0");
     data = {
-
-     minor:minor,
+      minor: minor,
       _id: { $ne: id },
-      role:{$ne:"admin"}
-
-    }
-  }
-  else if(major!=null && minor==null && interests.length>0)
-  {
-    console.log("Major: Full, Minor: Null, Int>0")
+      role: { $ne: "admin" },
+    };
+  } else if (major != null && minor == null && interests.length > 0) {
+    console.log("Major: Full, Minor: Null, Int>0");
     data = {
-
-     major:major,
-     interests: { $all: interests},
+      major: major,
+      interests: { $all: interests },
       _id: { $ne: id },
-      role:{$ne:"admin"}
-
-    }
+      role: { $ne: "admin" },
+    };
   }
 
-  if (role=="")
-  {
-   
-  }
-  else{
-    console.log("I am not empty")
-    var value=""
-    if (role=="student")
-    {
-      value="alumni"
+  if (role == "") {
+  } else {
+    console.log("I am not empty");
+    var value = "";
+    if (role == "student") {
+      value = "alumni";
+    } else {
+      value = "student";
     }
-    else{
-      value="student"
-    }
-    data["role"] =  { '$nin':  ["admin",value] }
+    data["role"] = { $nin: ["admin", value] };
   }
-  console.log(data)
-
-  
-  
+  console.log(data);
 
   User.find(data)
     .then((user) => {
@@ -137,7 +176,7 @@ exports.filter = (req, res) => {
           message: "User not found",
         });
       }
-      console.log(user)
+      console.log(user);
       res.send(user);
     })
     .catch((error) => {
@@ -150,38 +189,31 @@ exports.filter = (req, res) => {
         message: "Error retrieving user with id " + req.params.userId,
       });
     });
-
-
-
 };
 
 //find the matches
 
 exports.findMatches = (req, res) => {
-  
-  var userId = 0
-  var major = req.body.name
-  console.log(req.body)
+  var userId = 0;
+  var major = req.body.name;
+  console.log(req.body);
 
-  if (req.user.role=="admin")
-  {
-    userId = req.params.userId
-  }
-  else{
-    userId = req.user._id
+  if (req.user.role == "admin") {
+    userId = req.params.userId;
+  } else {
+    userId = req.user._id;
   }
   // const userId = req.params.userId;
 
-  
   if (!req.body) {
     return res.status(400).send({
       message: "Search content can not be empty",
     });
   }
   User.find({
-    name: {$regex :new RegExp(major,'i')},
+    name: { $regex: new RegExp(major, "i") },
     _id: { $ne: userId },
-    role:{$ne:"admin"}
+    role: { $ne: "admin" },
   })
     .then((user) => {
       if (!user) {

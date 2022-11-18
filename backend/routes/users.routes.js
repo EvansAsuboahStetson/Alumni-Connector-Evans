@@ -17,6 +17,20 @@ router.post(
   middleware.allowAdmin,
   usersController.findMatches
 );
+
+
+router.post(
+  "/user/pending",
+  middleware.verify,
+  usersController.pending
+);
+
+
+router.post(
+  "/user/connect",
+  middleware.verify,
+  usersController.connect
+);
 router.post(
   "/user/filter",
   middleware.verify,

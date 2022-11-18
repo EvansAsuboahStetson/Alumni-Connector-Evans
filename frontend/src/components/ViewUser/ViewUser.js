@@ -1,10 +1,12 @@
 import React from 'react'
 import { Card, Button, Row, Col } from "react-bootstrap";
+import Connect from '../Connect/Connect';
 import "./ViewUser.css"
 
 function ViewUser(props) {
     console.log(props)
     const user = props?.history?.location?.state
+    console.log(user._id,"heres")
   return (
     <div className="conty">
     <Card style={{ width: '18rem' }}>
@@ -26,7 +28,7 @@ function ViewUser(props) {
         <Card.Text>
           Interest: {user.interests?.map(x => x + ", ")}
         </Card.Text>
-        <Button variant="primary">Send Email</Button>
+       <Connect name={user.name} id={user._id}/>
       </Card.Body>
     </Card>
     </div>
