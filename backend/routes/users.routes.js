@@ -18,32 +18,24 @@ router.post(
   usersController.findMatches
 );
 
-
-router.post(
-  "/user/pending",
+router.patch(
+  "/user/deleteRequest",
   middleware.verify,
-  usersController.pending
+  usersController.deleteFriendRequest
 );
 
-
-router.post(
-  "/user/connect",
+router.post("/user/pending", middleware.verify, usersController.pending);
+router.get(
+  "/user/pendingRequest",
   middleware.verify,
-  usersController.connect
-);
-router.post(
-  "/user/filter",
-  middleware.verify,
-  usersController.filter
+  usersController.CheckingPendingRequest
 );
 
+router.post("/user/connect", middleware.verify, usersController.connect);
+router.post("/user/filter", middleware.verify, usersController.filter);
 
 //user to retrieve their own matches
-router.post(
-  "/user/matches",
-  middleware.verify,
-  usersController.findMatches
-);
+router.post("/user/matches", middleware.verify, usersController.findMatches);
 
 // Retrieve user by userId
 router.get(

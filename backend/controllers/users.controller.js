@@ -9,12 +9,60 @@ exports.findAll = (req, res) => {
       res.status(500).json({ message: err.message || "Internal Server error" })
     );
 };
+exports.deleteFriendRequest = (req, res) => {
+  let loggedIn = req.user._id;
+  const user_remove = req.body.id
+  console.log(user_remove,loggedIn)
+  User.findByIdAndUpdate(loggedIn, {$pull: {pendingFriends :{$in:[user_remove]}} 
+  })
+    .then((users) =>{
+      console.log(users,"dissss")
+      res.send(users)
+    
+    })
+    .catch((err) =>
+     {
+      console.log(err,"ppp")
+      res.status(500).json({ message: err.message || "Internal Server error" })
+});
+};
+exports.CheckingPendingRequest = (req, res) => {
+  let loggedIn = req.user._id;
+  User.find({ _id: loggedIn})
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({
+          message: "User not found.",
+        });
+      }
+      res.send(user);
+    })
+    .catch((error) => {
+      if (error.kind === "ObjectId" || error.name === "NotFound") {
+        return res.status(404).send({
+          message: "User not found.",
+        });
+      }
+      return res.status(500).send({
+        message: "Could not send request" + user,
+      });
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
 exports.pending = (req, res) => {
   let loggedIn = req.user._id;
-  console.log(loggedIn);
-
   let user = req.body.id;
-  console.log(user);
+
   //#id:user,
   //pendingFriends:{ $in: [loggedIn ] }
 
@@ -39,7 +87,7 @@ exports.pending = (req, res) => {
     });
 };
 exports.connect = (req, res) => {
-  console.log(req.body.id);
+ 
   let loggedIn = req.user._id;
 
   let user_Id = req.body.id;
@@ -55,7 +103,7 @@ exports.connect = (req, res) => {
     });
   }
   else{
-    console.log("Undefined")
+  
     User.findByIdAndUpdate(user_Id,  {
     
       $push: { pendingFriends: loggedIn },
@@ -88,36 +136,36 @@ exports.connect = (req, res) => {
 };
 
 exports.filter = (req, res) => {
-  console.log("This is interests", req.body.interests);
+
   const interests = req.body.interests;
   const major = req.body.major;
   const minor = req.body.minor;
   const id = req.user._id;
   const role = req.body.role.kindOfStand;
 
-  console.log(role, "PPPP");
+
 
   var data = {};
 
   if (major == null && minor == null && interests.length == 0) {
-    console.log("Major: null, Minor: null, Int==0");
+  
     data = { role: { $ne: "admin" }, _id: { $ne: id } };
   } else if (major != null && minor != null && interests.length > 0) {
-    console.log("Major: Full, Minor: Full, Int>0");
+
     data = {
       interests: { $all: interests },
       _id: { $ne: id },
       role: { $ne: "admin" },
     };
   } else if (major != null && minor == null && interests.length == 0) {
-    console.log("Major: Full, Minor: Null, Int==0");
+    
     data = {
       major: major,
       _id: { $ne: id },
       role: { $ne: "admin" },
     };
   } else if (major != null && minor != null && interests.length == 0) {
-    console.log("Major: Full, Minor: Full, Int==0");
+  
     data = {
       major: major,
       minor: minor,
@@ -176,7 +224,7 @@ exports.filter = (req, res) => {
           message: "User not found",
         });
       }
-      console.log(user);
+
       res.send(user);
     })
     .catch((error) => {
@@ -196,7 +244,7 @@ exports.filter = (req, res) => {
 exports.findMatches = (req, res) => {
   var userId = 0;
   var major = req.body.name;
-  console.log(req.body);
+
 
   if (req.user.role == "admin") {
     userId = req.params.userId;

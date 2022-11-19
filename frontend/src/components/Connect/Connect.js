@@ -30,7 +30,6 @@ function Connect({ name, id }) {
 
     fetchData();
   }, [btnActive]);
-  const [isConnect, setIsConnect] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleYes = async (close) => {
@@ -43,7 +42,7 @@ function Connect({ name, id }) {
 
       const { data } = await connectionRequest(token, datum);
       console.log(data, "Cindy me");
-      setbtnActive(false)
+      setbtnActive(false);
     } catch (err) {}
     setShow(false);
   };
