@@ -11,6 +11,11 @@ function FilterView(props) {
     const user = props?.history?.location?.state
     const [userFull, setUserFull] = useState(false)
 
+
+    const addContact = (name) => {
+        alert(`You sent a follower request to ${name}`);
+      }
+
     useEffect(() => {
         if (user.length > 0) {
             setUserFull(true)
@@ -32,6 +37,7 @@ function FilterView(props) {
 
                         />
                        <Connect name={use.name} id={use._id} />
+                        <Button onClick={() => addContact(use._id)} variant="primary">Add to Contact</Button>
                     </Col>
                 ))}
                 
