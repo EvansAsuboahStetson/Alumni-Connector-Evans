@@ -37,7 +37,7 @@ function FilterView(props) {
 
                         />
                        <Connect name={use.name} id={use._id} />
-                        <Button onClick={() => addContact(use._id)} variant="primary">Add to Contact</Button>
+                
                     </Col>
                 ))}
                 
