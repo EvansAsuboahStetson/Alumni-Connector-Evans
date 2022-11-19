@@ -12,6 +12,57 @@ export const getUsers = async (token) => {
   });
 };
 
+export const connectionRequest = async (token,credentials) => {
+  return axios({
+    method: "POST",
+    data:credentials,
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.CONNECTIONREQUEST}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const pendingFriend = async (token,credentials) => {
+  console.log("Cred",credentials)
+  return axios({
+    method: "POST",
+    data:credentials,
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.PENDINGEXIST}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+
+
+
+export const deleteFriendRequest = async (token,credentials) => {
+  console.log("Cred",credentials)
+  return axios({
+    method: "patch",
+    data:credentials,
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.DELETEFRIENDREQUEST}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+
+export const pendingFriendRequest = async (token) => {
+  return axios({
+    method: "GET",
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.PENDDINGUSEREXIST}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+
+
+
 // Function to get user
 export const getUser = async (userId, token) => {
   return axios({

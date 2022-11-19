@@ -91,15 +91,17 @@ const handleFileChange = event => {
 
   console.log('fileObj is', fileObj);
 
-  // 👇️ reset file input
 
+   // setting up the reader
+   var reader = new FileReader();
+   reader.readAsText(fileObj,'UTF-8');
 
-  // 👇️ is now empty
-  console.log(event.target.files);
-
-  // 👇️ can still access file object here
-  console.log(fileObj);
-  console.log(fileObj.name);
+   // here we tell the reader what to do when it's done reading...
+   reader.onload = readerEvent => {
+      var content = readerEvent.target.result; // this is the content!
+      console.log( content );
+   }
+  
 };
 
 
@@ -240,6 +242,7 @@ const handleFileChange = event => {
             <Form.Control
              ref={inputRef}
             type="file"
+            accept="image/*"
             onChange={handleFileChange}
             defaultValue=""/>
              

@@ -31,6 +31,7 @@ function getMenuItems(user) {
     { name: "Profile", link: `/users/${user._id}` },
     {name: "Filter",link:`/search/filter`},
     
+    
   ];
 
   if (user.role === "admin") {

@@ -5,6 +5,7 @@ import "../ViewUser/ViewUser"
 import { Row, Col, Button } from "react-bootstrap";
 import User from '../User/User';
 import "./filterView.css"
+import Connect from '../Connect/Connect';
 
 function FilterView(props) {
     const user = props?.history?.location?.state
@@ -19,11 +20,11 @@ function FilterView(props) {
         if (user.length > 0) {
             setUserFull(true)
         }
-
+        
 
     }, [])
 
-    console.log(user, "users.ksk")
+
     return (
         <div className='filterView'>
             {userFull ? <Row xs={1} md={2} lg={3} className="g-5">
@@ -35,6 +36,7 @@ function FilterView(props) {
                             user={use}
 
                         />
+                       <Connect name={use.name} id={use._id} />
                         <Button onClick={() => addContact(use._id)} variant="primary">Add to Contact</Button>
                     </Col>
                 ))}

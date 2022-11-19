@@ -2,7 +2,7 @@ import { Row, Col } from "react-bootstrap";
 import User from "../User/User";
 
 export default function Users(props) {
-  console.log(props,"propsy")
+
 
   const { users, onEdit, onDelete, onView } = props;
   
