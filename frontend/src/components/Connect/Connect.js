@@ -30,7 +30,6 @@ function Connect({ name, id, change }) {
       }
       else{
         setBtnConnect(false)
-        setbtnActive(false)
         setSentConnect(false)
 
       }
