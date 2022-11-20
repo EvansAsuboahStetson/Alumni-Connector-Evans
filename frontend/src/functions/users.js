@@ -23,11 +23,51 @@ export const connectionRequest = async (token,credentials) => {
   });
 };
 export const pendingFriend = async (token,credentials) => {
-  console.log("Cred",credentials)
+ 
   return axios({
     method: "POST",
     data:credentials,
     url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.PENDINGEXIST}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const sentRequest = async (token,credentials) => {
+ 
+  return axios({
+    method: "POST",
+    data:credentials,
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.SENTREQUEST}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+
+export const isConnected = async (token,credentials) => {
+
+  return axios({
+    method: "POST",
+    data:credentials,
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.CONNECTIONEXIST}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+
+
+
+export const acceptFriendRequest = async (token,credentials) => {
+
+
+  return axios({
+    method: "patch",
+    data:credentials,
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.ACCEPTFRIENDREQUEST}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -38,7 +78,7 @@ export const pendingFriend = async (token,credentials) => {
 
 
 export const deleteFriendRequest = async (token,credentials) => {
-  console.log("Cred",credentials)
+
   return axios({
     method: "patch",
     data:credentials,
@@ -76,7 +116,7 @@ export const getUser = async (userId, token) => {
 
 // Function to match search results
 export const getMatches = async ( token, credentials) => {
-  console.log("getMatches",credentials)
+ 
   return axios({
     method: "POST",
     url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.MATCHES}`,
@@ -87,7 +127,7 @@ export const getMatches = async ( token, credentials) => {
   });
 };
 export const getFilter = async ( token, credentials) => {
-  console.log("getMatches",credentials)
+
   return axios({
     method: "POST",
     url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.FILTER}`,

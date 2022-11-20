@@ -11,7 +11,11 @@ exports.constants = {
       CONNECTIONREQUEST:"/api/user/connect",
       PENDINGEXIST:"/api/user/pending",
       PENDDINGUSEREXIST:"/api/user/pendingRequest",
-      DELETEFRIENDREQUEST:"/api/user/deleteRequest"
+      DELETEFRIENDREQUEST:"/api/user/deleteRequest",
+      ACCEPTFRIENDREQUEST:"/api/user/acceptRequest",
+      CONNECTIONEXIST:"/api/user/connectionexist",
+      SENTREQUEST:"/api/user/sentRequest",
+      
     },
   },
 };

@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Toast from "react-bootstrap/Toast";
 import Noty from "./NotiIcon";
-import {connectionRequest,pendingFriendRequest,deleteFriendRequest} from "../../functions/users"
+import {acceptFriendRequest,pendingFriendRequest,deleteFriendRequest} from "../../functions/users"
 import Modal from "react-bootstrap/Modal";
 
 function Notification() {
@@ -25,8 +25,27 @@ function Notification() {
     
     setShow(false);
   };
-  const handleAccept = (ID) => {
-    setShow(false);
+  const handleAccept = async () => {
+    try{
+        const token = localStorage.getItem("token");
+        const datum ={
+            id:pendID
+        }
+
+     
+        await deleteFriendRequest(token,datum)
+        const {data} = await acceptFriendRequest(token,datum);
+        setdel(!del)
+
+
+     
+        setpentID()
+    
+        
+    }
+    catch (err) {console.log(err)}
+    setShow(false)
+   
    
   };
 
@@ -36,11 +55,9 @@ function Notification() {
         const datum ={
             id:pendID
         }
-        console.log(pendID,"ME")
-        console.log("I am deleting",datum)
         const {data} = await deleteFriendRequest(token,datum);
         setdel(!del)
-        console.log(data)
+
         setpentID()
     
         
@@ -67,7 +84,7 @@ function Notification() {
       setData(datum);
       const lengths = datum.length;
       setCount(lengths);
-      console.log(datum);
+    
     };
 
     findRequest();

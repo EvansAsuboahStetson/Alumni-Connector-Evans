@@ -18,13 +18,28 @@ router.post(
   usersController.findMatches
 );
 
+
+
 router.patch(
   "/user/deleteRequest",
   middleware.verify,
   usersController.deleteFriendRequest
 );
 
+
+
+router.patch(
+  "/user/acceptRequest",
+  middleware.verify,
+  usersController.acceptFriendRequest
+);
+
 router.post("/user/pending", middleware.verify, usersController.pending);
+
+router.post("/user/sentRequest", middleware.verify, usersController.pendingSent)
+///
+
+router.post("/user/connectionexist", middleware.verify, usersController.isConnected);
 router.get(
   "/user/pendingRequest",
   middleware.verify,

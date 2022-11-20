@@ -26,6 +26,30 @@ exports.deleteFriendRequest = (req, res) => {
       res.status(500).json({ message: err.message || "Internal Server error" })
 });
 };
+
+
+exports.acceptFriendRequest = (req, res) => {
+  let loggedIn = req.user._id;
+  const user_add = req.body.id
+  console.log(user_add,loggedIn) 
+  User.findByIdAndUpdate(loggedIn, {$push: { connectedFriends: user_add} 
+  })
+    .then((users) =>{
+      User.findByIdAndUpdate(user_add, {$push: { connectedFriends: loggedIn} 
+      }).then((user)=>{
+        res.send(user)
+      })
+    
+    
+    })
+    .catch((err) =>
+     {
+      console.log(err,"ppp")
+      res.status(500).json({ message: err.message || "Internal Server error" })
+});
+};
+
+
 exports.CheckingPendingRequest = (req, res) => {
   let loggedIn = req.user._id;
   User.find({ _id: loggedIn})
@@ -66,7 +90,7 @@ exports.pending = (req, res) => {
   //#id:user,
   //pendingFriends:{ $in: [loggedIn ] }
 
-  User.find({ _id: user, pendingFriends: { $in: [loggedIn] } })
+  User.find({ _id: loggedIn, pendingFriends: { $in: [user] } })
     .then((user) => {
       if (!user) {
         return res.status(404).send({
@@ -86,6 +110,76 @@ exports.pending = (req, res) => {
       });
     });
 };
+
+
+
+exports.pendingSent = (req, res) => {
+  let loggedIn = req.user._id;
+  let user = req.body.id;
+
+  //#id:user,
+  //pendingFriends:{ $in: [loggedIn ] }
+  console.log(loggedIn,"LOGGED IN")
+
+  console.log(user,"USER")
+
+  
+
+  User.find({ _id: loggedIn, sentRequest: { $in: [user] } })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({
+          message: "User not found.",
+        });
+      }
+      res.send(user);
+    })
+    .catch((error) => {
+      if (error.kind === "ObjectId" || error.name === "NotFound") {
+        return res.status(404).send({
+          message: "User not found.",
+        });
+      }
+      return res.status(500).send({
+        message: "Could not send request" + user,
+      });
+    });
+};
+
+
+exports.isConnected = (req, res) => {
+  let loggedIn = req.user._id;
+  let user = req.body.id;
+
+  //#id:user,
+  //pendingFriends:{ $in: [loggedIn ] }
+
+  User.find({ _id: loggedIn, connectedFriends: { $in: [user] } })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({
+          message: "User not found.",
+        });
+      }
+      res.send(user);
+    })
+    .catch((error) => {
+      if (error.kind === "ObjectId" || error.name === "NotFound") {
+        return res.status(404).send({
+          message: "User not found.",
+        });
+      }
+      return res.status(500).send({
+        message: "Could not send request" + user,
+      });
+    });
+};
+
+
+
+
+
+
 exports.connect = (req, res) => {
  
   let loggedIn = req.user._id;
@@ -107,14 +201,13 @@ exports.connect = (req, res) => {
     User.findByIdAndUpdate(user_Id,  {
     
       $push: { pendingFriends: loggedIn },
-    })
-      .then((user) => {
-        if (!user) {
-          return res.status(404).send({
-            message: "User not found.",
-          });
-        }
-        res.send({ message: "User Updated Already" });
+    }).then((users) =>{
+          User.findByIdAndUpdate(loggedIn, {$push: { sentRequest: user_Id} 
+          }).then((user)=>{
+            res.send(user)
+          }).catch((error)=>{
+            res.send(error)
+          })
       })
       .catch((error) => {
         if (error.kind === "ObjectId" || error.name === "NotFound") {
