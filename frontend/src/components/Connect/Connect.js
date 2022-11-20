@@ -48,6 +48,7 @@ function Connect({ name, id, change }) {
           setBtnConnect(false);
           setSentConnect(false);
           setbtnActive(true)
+          //commit
         }
       
     };
