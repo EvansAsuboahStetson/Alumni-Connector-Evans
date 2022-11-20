@@ -2,13 +2,18 @@ import React, { useEffect } from "react";
 
 import { Row, Col, Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
-import { connectionRequest, pendingFriend,isConnected ,sentRequest} from "../../functions/users";
+import {
+  connectionRequest,
+  pendingFriend,
+  isConnected,
+  sentRequest,
+} from "../../functions/users";
 
 import { useState } from "react";
-function Connect({ name, id }) {
+function Connect({ name, id, change }) {
   const [btnActive, setbtnActive] = useState(true);
   const [btnConnect, setBtnConnect] = useState(false);
-  const [sentConnect,setSentConnect] = useState(false)
+  const [sentConnect, setSentConnect] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -16,46 +21,41 @@ function Connect({ name, id }) {
       const datum = {
         id: id,
       };
-
       const ggg = await isConnected(token, datum);
 
-      const isConnect_array = ggg.data[0]?.connectedFriends
-   
+      const isConnect_array = ggg.data[0]?.connectedFriends;
 
-      if (isConnect_array?.length>0)
-      {
-        setBtnConnect(true)
-   
+      if (isConnect_array?.length > 0) {
+        setBtnConnect(true);
       }
       const { data } = await pendingFriend(token, datum);
 
       const sentReq = await sentRequest(token, datum);
 
-  
-      console.log(data,"req,rec")
-
       const userpending = data[0]?.pendingFriends;
-      const userSent = sentReq?.data[0]?.sentRequest
-      console.log(userSent,"SentReq")
-      console.log(btnActive)
+      const userSent = sentReq?.data[0]?.sentRequest;
 
-      if (userpending?.length > 0 ) {
+      console.log(userpending,"userpending")
+      console.log(userSent,"userSent")
+
+      if (userpending?.length > 0) {
         setbtnActive(false);
-       
-      }
-      else{
-        if(userSent?.length > 0)
-        {
-          setSentConnect(true)
-          setbtnActive(false)
+      } else if (userSent?.length > 0) {
+          setSentConnect(true);
+          setbtnActive(false);
         }
-      }
-
-     
+        else{
+          setBtnConnect(false);
+          setSentConnect(false);
+          setbtnActive(true)
+        }
+      
     };
 
     fetchData();
-  }, [btnActive,btnConnect]);
+   
+  }, [btnActive, btnConnect, sentConnect, id, name]);
+
   const [show, setShow] = useState(false);
 
   const handleYes = async (close) => {
@@ -68,48 +68,50 @@ function Connect({ name, id }) {
 
       const { data } = await connectionRequest(token, datum);
 
-      console.log(data,"sent data")
-
-
-
       setbtnActive(false);
     } catch (err) {}
     setShow(false);
   };
   const handleNo = (close) => {
-    console.log("No");
     setShow(false);
   };
   const handleShow = (Yes) => {
     setShow(true);
   };
 
-//   { this.state.loadingPage
-//     ? <span className="sr-only">Loading... Registered Devices</span>
-//     : <>
-//         {this.state.someBoolean
-//           ? <div>some title</div>
-//           : null
-//         }
-//         <div>body</div>
-//       </>
-//   }
-
-
   return (
     <div>
       <div>
-        {btnConnect ? <Button  variant="secondary" disabled>Connected</Button>:
-        <>
-          {btnActive ?<Button variant="primary" onClick={handleShow}> Add to Contact </Button>:  
+        {console.log("btnConnect",btnConnect,"btnActive",btnConnect)}
+        {btnConnect ? (
           
+          <Button variant="secondary" disabled>
+            Connected
+        
+          </Button>
+        ) : (
           <>
-           {sentConnect ?<Button variant="secondary" disabled> Sent Request </Button>:  
-            <Button variant="secondary" size="lg" disabled>
-            Pending Request
-          </Button>}  </>
-}  </>
-        }
+            {btnActive ? (
+              <Button variant="primary" onClick={handleShow}>
+                {" "}
+                Add to Contact{" "}
+              </Button>
+            ) : (
+              <>
+                {sentConnect ? (
+                  <Button variant="secondary" disabled>
+                    {" "}
+                    Sent Request{" "}
+                  </Button>
+                ) : (
+                  <Button variant="secondary" size="lg" disabled>
+                    Pending Request
+                  </Button>
+                )}{" "}
+              </>
+            )}{" "}
+          </>
+        )}
       </div>
       <Modal show={show} onHide={handleNo}>
         <Modal.Header closeButton>
