@@ -28,6 +28,9 @@ function Connect({ name, id, change }) {
       if (isConnect_array?.length > 0) {
         setBtnConnect(true);
       }
+      else{
+        setBtnConnect(false)
+      }
       const { data } = await pendingFriend(token, datum);
 
       const sentReq = await sentRequest(token, datum);
@@ -44,18 +47,20 @@ function Connect({ name, id, change }) {
           setSentConnect(true);
           setbtnActive(false);
         }
-        else{
-          setBtnConnect(false);
-          setSentConnect(false);
-          setbtnActive(true)
-          //commit
-        }
+      
+    
+        // else{
+        //   setBtnConnect(false);
+        //   setSentConnect(false);
+        //   setbtnActive(true)
+        //   //commit
+        // }
       
     };
 
     fetchData();
    
-  }, [btnActive, btnConnect, sentConnect, id, name]);
+  }, [btnActive,name,id]);
 
   const [show, setShow] = useState(false);
 
