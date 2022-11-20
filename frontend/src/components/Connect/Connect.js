@@ -37,6 +37,7 @@ function Connect({ name, id }) {
       const userpending = data[0]?.pendingFriends;
       const userSent = sentReq?.data[0]?.sentRequest
       console.log(userSent,"SentReq")
+      console.log(btnActive)
 
       if (userpending?.length > 0 ) {
         setbtnActive(false);
@@ -46,6 +47,7 @@ function Connect({ name, id }) {
         if(userSent?.length > 0)
         {
           setSentConnect(true)
+          setbtnActive(false)
         }
       }
 
