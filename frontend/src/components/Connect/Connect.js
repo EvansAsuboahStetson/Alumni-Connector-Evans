@@ -11,11 +11,17 @@ import {
 
 import { useState } from "react";
 function Connect({ name, id, change }) {
-  const [btnActive, setbtnActive] = useState(true);
+  const [btnPending, setBtnPending] = useState(false);
   const [btnConnect, setBtnConnect] = useState(false);
   const [sentConnect, setSentConnect] = useState(false);
+  const [btnActive, setbtnActive] = useState(false);
+
 
   useEffect(() => {
+    setBtnPending(false);
+    setBtnConnect(false);
+    setSentConnect(false);
+    setbtnActive(false)
     const token = localStorage.getItem("token");
     const fetchData = async () => {
       const datum = {
@@ -23,47 +29,36 @@ function Connect({ name, id, change }) {
       };
       const ggg = await isConnected(token, datum);
 
-      const isConnect_array = ggg.data[0]?.connectedFriends;
-
-      if (isConnect_array?.length > 0) {
-        setBtnConnect(true);
-      }
-      else{
-        setBtnConnect(false)
-        setSentConnect(false)
-        setbtnActive(true)
-
-      }
       const { data } = await pendingFriend(token, datum);
 
       const sentReq = await sentRequest(token, datum);
 
       const userpending = data[0]?.pendingFriends;
       const userSent = sentReq?.data[0]?.sentRequest;
+      const isConnect_array = ggg.data[0]?.connectedFriends;
 
-      console.log(userpending,"userpending")
-      console.log(userSent,"userSent")
-
-      if (userpending?.length > 0) {
-        setbtnActive(false);
-      } else if (userSent?.length > 0) {
-          setSentConnect(true);
-          setbtnActive(false);
-        }
-      
-    
-        // else{
-        //   setBtnConnect(false);
-        //   setSentConnect(false);
-        //   setbtnActive(true)
-        //   //commit
-        // }
-      
+      if (userpending !== undefined) {
+        setBtnPending(true);
+        console.log("Yes pending undefined");
+        return;
+      }
+      else if (userSent !== undefined) {
+        console.log(userSent, "Sent");
+        setSentConnect(true);
+        return;
+      }
+      else if (isConnect_array !== undefined) {
+        console.log("Yes connected undefined");
+        setBtnConnect(true);
+        return;
+      }
+      else{
+        setbtnActive(true)
+      }
     };
 
     fetchData();
-   
-  }, [btnActive,name,id]);
+  }, [name, id]);
 
   const [show, setShow] = useState(false);
 
@@ -77,7 +72,7 @@ function Connect({ name, id, change }) {
 
       const { data } = await connectionRequest(token, datum);
 
-      setbtnActive(false);
+      setSentConnect(true);
     } catch (err) {}
     setShow(false);
   };
@@ -91,19 +86,23 @@ function Connect({ name, id, change }) {
   return (
     <div>
       <div>
-        {console.log("btnConnect",btnConnect,"btnActive",btnConnect)}
+        {console.log(
+          "btnConnect",
+          btnConnect,
+          "btnActive",
+          btnActive,
+          "btnSent",
+          sentConnect
+        )}
         {btnConnect ? (
-          
           <Button variant="secondary" disabled>
             Connected
-        
           </Button>
         ) : (
           <>
-            {btnActive ? (
-              <Button variant="primary" onClick={handleShow}>
-                {" "}
-                Add to Contact{" "}
+            {btnPending ? (
+              <Button variant="secondary" size="lg" disabled>
+                Pending Request
               </Button>
             ) : (
               <>
@@ -113,9 +112,19 @@ function Connect({ name, id, change }) {
                     Sent Request{" "}
                   </Button>
                 ) : (
-                  <Button variant="secondary" size="lg" disabled>
-                    Pending Request
-                  </Button>
+                  
+                  <>
+
+
+                  {btnActive ? ( <Button variant="primary" onClick={handleShow}>{" "}Add to Contact{" "} </Button>
+                  ) : (
+                    
+                    <Button variant="secondary" size="lg" disabled>
+                    NOTHING
+                    </Button>
+                  )}{" "}
+                </>
+
                 )}{" "}
               </>
             )}{" "}
