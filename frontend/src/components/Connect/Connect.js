@@ -31,6 +31,7 @@ function Connect({ name, id, change }) {
       else{
         setBtnConnect(false)
         setSentConnect(false)
+        setbtnActive(true)
 
       }
       const { data } = await pendingFriend(token, datum);
