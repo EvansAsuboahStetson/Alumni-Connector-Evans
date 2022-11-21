@@ -3,7 +3,7 @@ import "./User.css"
 
 export default function User(props) {
   const { user, onEdit, onDelete, onView } = props;
-  console.log(user.interests,"interests")
+
   return (
     <Card className="mt-2 mb-2 ml-2 mr-2" style={{ width: '22rem', height:'38rem'}}>
       <Row className="g-3">

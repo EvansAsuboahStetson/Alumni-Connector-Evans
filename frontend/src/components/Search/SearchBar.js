@@ -23,7 +23,7 @@ const SearchBar = (props) => {
   const [datInput,setDatInput] = useState("")
   const {filteredData,setFilteredData } = props;
 
-  console.log(props,"Here")
+
 
 
 
@@ -71,17 +71,17 @@ const SearchBar = (props) => {
 
   const [seeAllData, setSeeAllData] = useState(false);
   const handleOnclick = (user) => {
-    console.log("This is user", user);
     history.push({
       pathname: "/user/userView",
       state: user
     });
     setFilteredData([])
+    console.log("sending user", user)
   };
 
   useEffect(() => {
     if (filteredData?.length > 7) {
-      console.log("Yo you are in");
+      
       setSeeAllData(true);
     } else {
       setSeeAllData(false);
@@ -118,7 +118,7 @@ const SearchBar = (props) => {
           {filteredData?.slice(0, 6).map((value, index) => {
             return (
               <div className="dataItem" key={value.id}>
-                {console.log("value", value)}
+             
                 
                 <ListGroup.Item
                   as="li"

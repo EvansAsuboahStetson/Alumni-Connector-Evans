@@ -30,7 +30,7 @@ function Filter() {
   
     const handleChanges = e => {
       e.persist();
-      console.log(e.target.value);
+   
   
       setItem(prevState => ({
         ...prevState,
@@ -53,11 +53,9 @@ function Filter() {
  
 
     const submit =async()=>{
-        console.log(major)
-        console.log(minor)
-        console.log(selectedValue)
+      
         const token = localStorage.getItem("token");
-        console.log("sub-item",item)
+
 
         try {
             const datum = {
@@ -68,7 +66,7 @@ function Filter() {
             };
          
             const {data} = await getFilter(token,datum);
-            console.log(data)
+
 
             history.push({
                 pathname: "/user/filter",

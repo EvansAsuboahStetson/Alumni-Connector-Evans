@@ -17,6 +17,7 @@ function SearchDisplay(props) {
       pathname: "/user/userView",
       state: user
     });
+   
     setFilteredData([])
   };
 

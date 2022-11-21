@@ -3,6 +3,7 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import SearchBar from "../Search/SearchBar";
+import Notification from "../Notification/Notification";
 
 const MenuBar = (props) => {
   const { menuItems, routes, bg, variant,filteredData,setFilteredData } = props;
@@ -28,6 +29,7 @@ const MenuBar = (props) => {
               </Nav>
             </Navbar.Collapse>
             <SearchBar setFilteredData={setFilteredData} filteredData={filteredData} />
+            <Notification/>
           </Container>
         </Navbar>
       ) : (

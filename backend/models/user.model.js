@@ -31,7 +31,23 @@ const model = mongoose.Schema(
       type: Array ,
       required: false,
       default : []
+    }, 
+    pendingFriends: {
+      type: Array ,
+      required: false,
+      default : []
     },
+    connectedFriends: {
+      type: Array ,
+      required: false,
+      default : []
+    },
+    sentRequest: {
+      type: Array ,
+      required: false,
+      default : []
+    },
+    
     profilePic: {
       type: String,
       required: false,

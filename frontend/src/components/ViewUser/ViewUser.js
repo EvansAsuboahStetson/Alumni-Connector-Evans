@@ -1,36 +1,50 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
-import "./ViewUser.css"
+import Connect from "../Connect/Connect";
+import "./ViewUser.css";
 
 function ViewUser(props) {
-    console.log(props)
-    const user = props?.history?.location?.state
+  const [name, setName] = useState();
+  const [id, setId] = useState();
+  const [email, setEmail] = useState();
+  const [role, setRole] = useState();
+  const [interests, setInterest] = useState();
+  const [major, setMajor] = useState();
+  const [minor, setMinor] = useState();
+  const [profilePic, setProfilePic] = useState();
+
+  const user = props?.history?.location?.state;
+
+  useEffect(() => {
+    setName(user?.name);
+    setId(user?._id);
+    setEmail(user?.email);
+    setMajor(user?.major);
+    setMinor(user?.minor);
+    setRole(user?.role);
+    setInterest(user?.interests);
+    setProfilePic(user?.profilePic);
+  }, [props]);
   return (
     <div className="conty">
-    <Card style={{ width: '18rem' }}>
-      <Card.Img  style={{ width: '18rem' , height:'17rem'}} variant="top" src={user.profilePic} />
-      <Card.Body>
-        <Card.Title>{user.name}</Card.Title>
-        <Card.Text>
-         Email: {user.email}
-        </Card.Text>
-        <Card.Text>
-          Major: {user.major}
-        </Card.Text>
-        <Card.Text>
-          Minor: {user.minor}
-        </Card.Text>
-        <Card.Text>
-          Role: {user.role}
-        </Card.Text>
-        <Card.Text>
-          Interest: {user.interests?.map(x => x + ", ")}
-        </Card.Text>
-        <Button variant="primary">Send Email</Button>
-      </Card.Body>
-    </Card>
+      <Card style={{ width: "18rem" }}>
+        <Card.Img
+          style={{ width: "18rem", height: "17rem" }}
+          variant="top"
+          src={profilePic}
+        />
+        <Card.Body>
+          <Card.Title>{name}</Card.Title>
+          <Card.Text>Email: {email}</Card.Text>
+          <Card.Text>Major: {major}</Card.Text>
+          <Card.Text>Minor: {minor}</Card.Text>
+          <Card.Text>Role: {role}</Card.Text>
+          <Card.Text>Interest: {interests?.map((x) => x + ", ")}</Card.Text>
+          <Connect name={name} id={id} />
+        </Card.Body>
+      </Card>
     </div>
-  )
+  );
 }
 
-export default ViewUser
+export default ViewUser;

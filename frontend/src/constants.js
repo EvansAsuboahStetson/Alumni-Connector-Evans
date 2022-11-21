@@ -7,7 +7,15 @@ exports.constants = {
       USERS: "/api/users",
       EVENTS: "/api/events",
       MATCHES:"/api/user/matches",
-      FILTER:"/api/user/filter"
+      FILTER:"/api/user/filter",
+      CONNECTIONREQUEST:"/api/user/connect",
+      PENDINGEXIST:"/api/user/pending",
+      PENDDINGUSEREXIST:"/api/user/pendingRequest",
+      DELETEFRIENDREQUEST:"/api/user/deleteRequest",
+      ACCEPTFRIENDREQUEST:"/api/user/acceptRequest",
+      CONNECTIONEXIST:"/api/user/connectionexist",
+      SENTREQUEST:"/api/user/sentRequest",
+      
     },
   },
 };
