@@ -9,7 +9,8 @@ export default function EventFormModal(props) {
   const nameRef = useRef(event?.name);
   const descriptionRef = useRef(event?.description);
   const dateRef = useRef(event?.date);
-  const imageRef = useRef(event?.image);
+  const StarttimeRef = useRef(event?.Starttime);
+  const EndtimeRef = useRef(event?.Endtime);
   const locationRef = useRef(event?.location);
 
   useEffect(() => {
@@ -33,8 +34,9 @@ export default function EventFormModal(props) {
       name: nameRef.current.value,
       description: descriptionRef.current.value,
       date: dateRef.current.value,
-      image: imageRef.current.value,
       location: locationRef.current.value,
+      Starttime: StarttimeRef.current.value,
+      Endtime: EndtimeRef.current.value,
     };
 
     onSubmit(event);
@@ -48,10 +50,10 @@ export default function EventFormModal(props) {
       <Modal.Body>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicTextName">
-            <Form.Label>Event name</Form.Label>
+            <Form.Label>Event Name</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter event name"
+              placeholder="Enter Event Name"
               ref={nameRef}
               defaultValue={event?.name}
               required
@@ -59,10 +61,10 @@ export default function EventFormModal(props) {
           </Form.Group>
 
           <Form.Group controlId="formBasicTextDescription">
-            <Form.Label>Event description</Form.Label>
+            <Form.Label>Event Description</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter event description"
+              placeholder="Enter Event Description"
               ref={descriptionRef}
               defaultValue={event?.description}
               required
@@ -70,32 +72,43 @@ export default function EventFormModal(props) {
           </Form.Group>
 
           <Form.Group controlId="formBasicDate">
-            <Form.Label>Event date</Form.Label>
+            <Form.Label>Event Date</Form.Label>
             <Form.Control
               type="date"
-              placeholder="Enter event date"
+              placeholder="Enter Event Date"
               ref={dateRef}
               defaultValue={event?.date}
               required
             />
           </Form.Group>
 
-          <Form.Group controlId="formBasicTextImage">
-            <Form.Label>Event image</Form.Label>
+          <Form.Group controlId="formBasicTextTime">
+            <Form.Label>Event Start Time</Form.Label>
             <Form.Control
-              type="text"
-              placeholder="Enter event image"
-              ref={imageRef}
-              defaultValue={event?.image}
+              type="time"
+              placeholder="Enter Event Start Time"
+              ref={StarttimeRef}
+              defaultValue={event?.Starttime}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicTextTime">
+            <Form.Label>Event End Time</Form.Label>
+            <Form.Control
+              type="time"
+              placeholder="Enter Event End Time"
+              ref={EndtimeRef}
+              defaultValue={event?.Endtime}
               required
             />
           </Form.Group>
 
           <Form.Group controlId="formBasicTextLocation">
-            <Form.Label>Event location</Form.Label>
+            <Form.Label>Event Location</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter event location"
+              placeholder="Enter Event Location"
               ref={locationRef}
               defaultValue={event?.location}
               required

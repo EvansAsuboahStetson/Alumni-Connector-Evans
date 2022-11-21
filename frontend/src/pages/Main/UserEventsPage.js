@@ -120,7 +120,7 @@ export default function UserEventsPage() {
     // Show confirm modal
     setConfirm({
       show: true,
-      title: "Delete event",
+      title: "Delete Event",
       message: "Are you sure you want to delete this event?",
       onConfirm: () => {
         setConfirm({
@@ -240,7 +240,7 @@ export default function UserEventsPage() {
       {/* Show create event button at bottom center */}
       <div className="d-flex justify-content-center">
         <Button variant="dark" className="mt-3 mb-3" onClick={handleCreate}>
-          Create event
+          Create Event
         </Button>
       </div>
 
