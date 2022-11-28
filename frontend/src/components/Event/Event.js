@@ -23,9 +23,7 @@ export default function Event(props) {
             {onEdit && (
               <Row>
                 <Col>
-                  <Button variant="primary" onClick={() => onEdit(event)}>
-                    Edit
-                  </Button>
+                  <Button variant="primary" onClick={() => onEdit(event)}>Edit</Button>
                 </Col>
               </Row>
             )}

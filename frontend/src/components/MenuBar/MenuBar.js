@@ -4,15 +4,13 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import SearchBar from "../Search/SearchBar";
 import Notification from "../Notification/Notification";
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const MenuBar = (props) => {
   const { menuItems, routes, bg, variant,filteredData,setFilteredData } = props;
 
   return (
     <div>
-
-  
-   
       {menuItems && menuItems.length ? (
         <Navbar bg={bg || "dark"} variant={variant || "dark"} expand="md">
           <Container>
@@ -26,6 +24,13 @@ const MenuBar = (props) => {
                     </Nav.Link>
                   );
                 })}
+                <NavDropdown title="Resource Library" id="basic-nav-dropdown">
+                  <NavDropdown.Divider/>
+                    <NavDropdown.Item href="#action/3.1">Investments</NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.2">Entrepreneurship</NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.3">Management</NavDropdown.Item>
+                  <NavDropdown.Divider/>
+                </NavDropdown>
               </Nav>
             </Navbar.Collapse>
             <SearchBar setFilteredData={setFilteredData} filteredData={filteredData} />
