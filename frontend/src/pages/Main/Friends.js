@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Container, Spinner } from "react-bootstrap";
 import Users from "../../components/Users/Users";
-import { getUsers, updateUser, deleteUser } from "../../functions/users";
 import AlertModal from "../../components/AlertModal/AlertModal";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import UserFormModal from "../../components/UserFormModal/UserFormModal";
+import {getUserId,getFriends,getUsers} from "../../functions/users"
 
 export default function UsersPage() {
+  const [connectedFriends,setConnectedFriends]= useState([])
+
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({ show: false, title: "", message: "" });
@@ -26,30 +28,107 @@ export default function UsersPage() {
     onSubmit: () => {},
   });
 
+
+  const getAllFollowersID = async () => {
+    try {
+     
+      const token = localStorage.getItem("token");
+
+      const response = await getUserId(token)
+
+      setConnectedFriends(response?.data?.connectedFriends)
+    
+
+      // setConnectedFriends(response?.data[0]?.connectedFriends)
+  
+    } 
+    catch (error)
+     {
+      console.log(error)
+    } 
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const getFollowersInfo = async () => {
+    try {
+     
+      const token = localStorage.getItem("token");
+      console.log(connectedFriends,"Here")
+
+      const credentials = {
+        data : connectedFriends
+      }
+
+     
+   
+    
+
+        setLoading(true);
+        try {
+          const token = localStorage.getItem("token");
+          const response = await getFriends(token,credentials)
+          console.log(response.data,"Quick")
+          setUsers(response.data);
+        } catch (error) {
+          // Show error
+          console.log(error)
+          setAlert({
+            show: true,
+            title: "Error",
+            message:
+              error.response.data.message ||
+              error.response.data.error ||
+              "Something went wrong",
+          });
+        } finally {
+          setLoading(false);
+        }
+      
+
+
+
+
+      // setConnectedFriends(response?.data[0]?.connectedFriends)
+  
+    } 
+    catch (error)
+     {
+      console.log(error)
+    } 
+  };
+
+  useEffect(()=>{
+
+   getFollowersInfo()
+  },[connectedFriends])
+
+
+
+
+
+
+
+
   const history = useHistory();
 
   useEffect(() => {
-    const getAllUsers = async () => {
-      setLoading(true);
-      try {
-        const token = localStorage.getItem("token");
-        const response = await getUsers(token);
-        setUsers(response.data);
-      } catch (error) {
-        // Show error
-        setAlert({
-          show: true,
-          title: "Error",
-          message:
-            error.response.data.message ||
-            error.response.data.error ||
-            "Something went wrong",
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
-    getAllUsers();
+  
+
+    getAllFollowersID()
+
+
   }, []);
   
   return (
@@ -62,7 +141,7 @@ export default function UsersPage() {
 
       <Users
         users={users}
-        onView={(user) => history.push(`/users/${user._id}`)}
+       
       />
 
       <UserFormModal {...userForm} />

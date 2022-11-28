@@ -13,7 +13,19 @@ export const getUsers = async (token) => {
 };
 
 
+export const getUserId = async (token) => {
+  return axios({
+    method: "get",
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.USERBYID}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+
 export const getFriends = async (token,credentials) => {
+  console.log(credentials)
   return axios({
     method: "post",
     data: credentials,
