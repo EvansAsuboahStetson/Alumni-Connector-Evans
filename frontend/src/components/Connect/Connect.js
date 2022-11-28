@@ -44,6 +44,12 @@ function Connect({ name, id, change }) {
       }
       else if (userSent !== undefined) {
         console.log(userSent, "Sent");
+        if(isConnect_array !== undefined) {
+          console.log("Yes connected undefined");
+          setBtnConnect(true);
+          return;
+        }
+        
         setSentConnect(true);
         return;
       }
