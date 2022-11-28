@@ -7,6 +7,7 @@ exports.constants = {
       USERS: "/api/users",
       EVENTS: "/api/events",
       FOLLOWEREVENTS:"/api/user/follower/events",
+      FRIENDS:"/api/user/follower/friends",
       FOLLOWERPOSTS: "/api/user/follower/posts",
       MATCHES:"/api/user/matches",
       FILTER:"/api/user/filter",

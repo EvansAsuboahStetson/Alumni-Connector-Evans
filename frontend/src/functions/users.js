@@ -12,6 +12,20 @@ export const getUsers = async (token) => {
   });
 };
 
+
+export const getFriends = async (token,credentials) => {
+  return axios({
+    method: "post",
+    data: credentials,
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.FRIENDS}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+
+
 export const connectionRequest = async (token,credentials) => {
   return axios({
     method: "POST",
