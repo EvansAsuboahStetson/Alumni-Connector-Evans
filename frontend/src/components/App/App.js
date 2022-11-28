@@ -19,6 +19,9 @@ import ViewUser from "../ViewUser/ViewUser";
 
 import FilterView from "../FilterView/filterView";
 
+import FriendPage from "../../pages/Main/Friends";
+
+
 
 function getMenuItems(user) {
   if (!user) {
@@ -30,7 +33,7 @@ function getMenuItems(user) {
     { name: "User Events", link: `/users/${user._id}/events` },
     { name: "Profile", link: `/users/${user._id}` },
     {name: "Filter",link:`/search/filter`},
-    
+    {name: "Friends",link:`/friends`},
     
   ];
 
@@ -57,6 +60,8 @@ function getRoutes(user) {
 
     { path: "/majorpage", component: Majorpage, exact: true},
     {path:"/search/filter",component:Filter,exact:true},
+    
+    {path:"/friends",component:FriendPage,exact:true},
 
   ];
 }
