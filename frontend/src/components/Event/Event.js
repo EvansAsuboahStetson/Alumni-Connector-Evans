@@ -1,13 +1,16 @@
 import { Card, Button, Row, Col } from "react-bootstrap";
+import User from "../../components/User/User";
 
 export default function Event(props) {
   const { event, onEdit, onDelete } = props;
+
   return (
     <Card className="mt-2 mb-2">
       <Row className="g-4">
         <Col md="6">
           <Card.Body>
             <Card.Title>{event.name}</Card.Title>
+            <Card.Text>Posted By: {User.name}</Card.Text>
             <Card.Text>{event.description}</Card.Text>
             <Card.Text>Location: {event.location}</Card.Text>
             <Card.Text>Date: {event.date}</Card.Text>

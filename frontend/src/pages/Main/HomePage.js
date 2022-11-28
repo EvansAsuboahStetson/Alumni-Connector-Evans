@@ -3,6 +3,7 @@ import { Container, Spinner } from "react-bootstrap";
 import Events from "../../components/Events/Events";
 import { getEvents } from "../../functions/events";
 import AlertModal from "../../components/AlertModal/AlertModal";
+import EventSearch from "../../components/EventSearch/EventSearch";
 
 export default function HomePage() {
   const [events, setEvents] = useState([]);
@@ -35,8 +36,9 @@ export default function HomePage() {
   }, []);
 
   return (
-
+    // set filtered data in searchbar
     <Container>
+      <EventSearch/>
       {loading ? (
         <div className="d-flex justify-content-center">
           <Spinner animation="border" variant="dark" />
