@@ -60,6 +60,12 @@ router.get(
   usersController.findById
 );
 
+router.get(
+  "/user/userId",
+  middleware.verify,
+  usersController.findById
+);
+
 // Update user by userId
 router.patch(
   "/users/:userId",
@@ -100,6 +106,12 @@ router.get(
   usersController.findUserEventById
 );
 
+router.post(
+  "/user/follower/friends",
+  middleware.verify,
+  usersController.findFriends
+
+)
 router.post(
   "/user/follower/posts",
   middleware.verify,

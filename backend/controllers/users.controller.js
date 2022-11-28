@@ -4,6 +4,10 @@ const eventService = require("../services/event.service");
 
 
 // Function to find all users
+
+
+
+
 exports.findAll = (req, res) => {
   User.find(null, { password: 0 })
     .then((users) => res.send(users))
@@ -380,7 +384,15 @@ exports.findMatches = (req, res) => {
 
 // Function to find user by userId
 exports.findById = (req, res) => {
-  User.findById(req.params.userId, { password: 0 })
+  var userId = ""
+
+  if (req.user.role == "admin") {
+    userId = req.params.userId;
+  } else {
+    userId = req.user._id;
+  }
+
+  User.findById(userId, { password: 0 })
     .then((user) => {
       if (!user) {
         return res.status(404).send({
@@ -396,7 +408,7 @@ exports.findById = (req, res) => {
         });
       }
       return res.status(500).send({
-        message: "Error retrieving user with id " + req.params.userId,
+        message: "Error retrieving user with id " + userId,
       });
     });
 };
@@ -624,38 +636,27 @@ exports.findUserEventByIdFollower = (req, res) => {
     return res.send(event)
 
   })
+  
 
 
-  // eventService
-  //   .findEventById(id)
-  //   .then((event) => {
-  //     if (!event) {
-  //       return res.status(404).send({
-  //         message: "Event not found.",
-  //       });
-  //     }
-
-  //     if (event.createdBy.toString() !== req.params.userId) {
-  //       return res.status(404).send({
-  //         message: "Event not found.",
-  //       });
-  //     }
-
-  //     res.send(event);
-  //   })
-  //   .catch((error) => {
-  //     if (error.kind === "ObjectId") {
-  //       return res.status(404).send({
-  //         message: "Event not found.",
-  //       });
-  //     }
-  //     return res.status(500).send({
-  //       message:
-  //         error.message ||
-  //         "Error retrieving event with id " + req.params.eventId,
-  //     });
-  //   });
 };
+
+
+exports.findFriends= (req,res)=>{
+
+  const user_data = req.body.data
+  const id = req.user._id;
+
+  User.find({_id: {$in: user_data, $ne: id }}).then((user)=>{
+    if (!user)
+    {
+      return res.status(404).send({
+        message: "User not found.",
+      });
+    }
+    return res.send(user)
+  })
+}
 
 
 
