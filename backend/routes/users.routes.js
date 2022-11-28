@@ -100,6 +100,20 @@ router.get(
   usersController.findUserEventById
 );
 
+router.post(
+  "/user/follower/posts",
+  middleware.verify,
+  usersController.findUserEventByIdFollower
+
+)
+
+router.get(
+ 
+  "/user/follower/events",
+  middleware.verify,
+  usersController.findFollowerEvents
+);
+
 // Update event by eventId and userId
 router.patch(
   "/users/:userId/events/:eventId",

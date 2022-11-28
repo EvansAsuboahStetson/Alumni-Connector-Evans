@@ -16,12 +16,11 @@ function Connect({ name, id, change }) {
   const [sentConnect, setSentConnect] = useState(false);
   const [btnActive, setbtnActive] = useState(false);
 
-
   useEffect(() => {
     setBtnPending(false);
     setBtnConnect(false);
     setSentConnect(false);
-    setbtnActive(false)
+    setbtnActive(false);
     const token = localStorage.getItem("token");
     const fetchData = async () => {
       const datum = {
@@ -41,25 +40,22 @@ function Connect({ name, id, change }) {
         setBtnPending(true);
         console.log("Yes pending undefined");
         return;
-      }
-      else if (userSent !== undefined) {
+      } else if (userSent !== undefined) {
         console.log(userSent, "Sent");
-        if(isConnect_array !== undefined) {
+        if (isConnect_array !== undefined) {
           console.log("Yes connected undefined");
           setBtnConnect(true);
           return;
         }
-        
+
         setSentConnect(true);
         return;
-      }
-      else if (isConnect_array !== undefined) {
+      } else if (isConnect_array !== undefined) {
         console.log("Yes connected undefined");
         setBtnConnect(true);
         return;
-      }
-      else{
-        setbtnActive(true)
+      } else {
+        setbtnActive(true);
       }
     };
 
@@ -118,19 +114,18 @@ function Connect({ name, id, change }) {
                     Sent Request{" "}
                   </Button>
                 ) : (
-                  
                   <>
-
-
-                  {btnActive ? ( <Button variant="primary" onClick={handleShow}>{" "}Add to Contact{" "} </Button>
-                  ) : (
-                    
-                    <Button variant="secondary" size="lg" disabled>
-                    NOTHING
-                    </Button>
-                  )}{" "}
-                </>
-
+                    {btnActive ? (
+                      <Button variant="primary" onClick={handleShow}>
+                        {" "}
+                        Add to Contact{" "}
+                      </Button>
+                    ) : (
+                      <Button variant="secondary" size="lg" disabled>
+                        NOTHING
+                      </Button>
+                    )}{" "}
+                  </>
                 )}{" "}
               </>
             )}{" "}

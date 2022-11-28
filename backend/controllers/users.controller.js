@@ -1,6 +1,8 @@
 const User = require("../models/user.model");
 const eventService = require("../services/event.service");
 
+
+
 // Function to find all users
 exports.findAll = (req, res) => {
   User.find(null, { password: 0 })
@@ -502,6 +504,32 @@ exports.createUserEvent = (req, res) => {
 };
 
 // Function to find all events of a user by userId
+
+
+exports.findFollowerEvents = (req, res) => {
+const user =  req.user._id
+ User.find({ _id: user, connectedFriends: { $exists: true,$not:{$size:0} }}).then((use)=>{
+  res.send(use)
+ }).catch((error)=>{
+  res.send(error)
+ })
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 exports.findUserEvents = (req, res) => {
   eventService
     .findUserEvents(req.params.userId)
@@ -525,6 +553,26 @@ exports.findUserEvents = (req, res) => {
       });
     });
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Function to find user event by userId and eventId
 exports.findUserEventById = (req, res) => {
@@ -559,6 +607,59 @@ exports.findUserEventById = (req, res) => {
       });
     });
 };
+
+
+
+
+exports.findUserEventByIdFollower = (req, res) => {
+  const data = req.body.id
+  eventService.findFollowerPost(data).then((event)=>{
+    if(!event)
+    {
+      return res.status(404).send({
+                message: "Event not found.",
+              });
+        
+    }
+    return res.send(event)
+
+  })
+
+
+  // eventService
+  //   .findEventById(id)
+  //   .then((event) => {
+  //     if (!event) {
+  //       return res.status(404).send({
+  //         message: "Event not found.",
+  //       });
+  //     }
+
+  //     if (event.createdBy.toString() !== req.params.userId) {
+  //       return res.status(404).send({
+  //         message: "Event not found.",
+  //       });
+  //     }
+
+  //     res.send(event);
+  //   })
+  //   .catch((error) => {
+  //     if (error.kind === "ObjectId") {
+  //       return res.status(404).send({
+  //         message: "Event not found.",
+  //       });
+  //     }
+  //     return res.status(500).send({
+  //       message:
+  //         error.message ||
+  //         "Error retrieving event with id " + req.params.eventId,
+  //     });
+  //   });
+};
+
+
+
+
 
 // Update user event by userId and eventId
 exports.updateUserEvent = (req, res) => {

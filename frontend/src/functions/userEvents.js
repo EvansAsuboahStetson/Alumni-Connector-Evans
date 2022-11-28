@@ -12,6 +12,27 @@ export const getUserEvents = async (userId, token) => {
   });
 };
 
+export const getFollowerEvents = async (token) => {
+  return axios({
+    method: "get",
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.FOLLOWEREVENTS}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const getPosts = async (token,user_ids) => {
+  return axios({
+    method: "post",
+    data:user_ids,
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.FOLLOWERPOSTS}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 // Function to update user event
 export const updateUserEvent = async (userId, eventId, data, token) => {
   return axios({
