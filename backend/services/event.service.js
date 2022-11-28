@@ -6,7 +6,7 @@ const findEventByFilter = (filter) => {
 };
 
 // Function to find all events
-exports.findAllEvents = () => {
+exports.findAllEvents = (user_Id) => {
   return findEventByFilter({});
 };
 
@@ -14,6 +14,24 @@ exports.findAllEvents = () => {
 exports.findUserEvents = (userId) => {
   return findEventByFilter({ createdBy: userId });
 };
+
+exports.findFollowerPost=(userId)=>{
+  return findEventByFilter({createdBy: {$in: userId}})
+}
+
+
+exports.findFollowerEvents = (followerId)=>{
+  return findEventByFilter ({createdBy: followerId})
+}
+
+
+
+
+
+
+
+
+
 
 // Function to find event by eventId
 exports.findEventById = (eventId) => {

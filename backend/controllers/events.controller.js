@@ -1,10 +1,7 @@
 const eventService = require("../services/event.service");
 
 // Function to find all events
-exports.findAll = (req, res) => {
-  eventService
-    .findAllEvents()
-    .then((events) => {
+exports.findAll = (req, res) => {eventService.findAllEvents().then((events) => {
       if (!events) {
         return res.status(404).send({
           message: "Events not found.",
