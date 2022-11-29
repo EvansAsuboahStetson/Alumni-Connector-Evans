@@ -137,7 +137,7 @@ function Connect({ name, id, change }) {
           <Modal.Title>Connection Request?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Do you want to connect with {name} {id}{" "}
+          Do you want to connect with {name}?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleNo}>
