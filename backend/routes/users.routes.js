@@ -46,6 +46,12 @@ router.get(
   usersController.CheckingPendingRequest
 );
 
+router.post(
+  "/user/namesOfPendingRequest",
+  middleware.verify,
+  usersController.findUsersArray
+);
+
 router.post("/user/connect", middleware.verify, usersController.connect);
 router.post("/user/filter", middleware.verify, usersController.filter);
 

@@ -5,6 +5,16 @@ const eventService = require("../services/event.service");
 
 // Function to find all users
 
+exports.findUsersArray = (req,res)=>{
+  const userIds = req.body.follower
+  console.log(userIds,"Historian")
+  User.find({_id: {$in: userIds}}).then((users)=>{
+    res.send(users)
+  }).catch((error)=>{
+    res.send(error)
+  })
+}
+
 
 
 
