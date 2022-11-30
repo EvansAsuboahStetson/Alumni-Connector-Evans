@@ -76,6 +76,7 @@ export default function SignupPage() {
   return (
     <div>
       {/* Show signup card */}
+      <img className="logo" src="/images/logo.png"/>
       <Card bg="dark" text="white" className="form-card">
         <Card.Header>Signup</Card.Header>
         <Card.Body>

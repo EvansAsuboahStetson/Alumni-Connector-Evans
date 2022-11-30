@@ -59,6 +59,7 @@ export default function LoginPage() {
   return (
     <div>
       {/* Show login card */}
+      <img className="logo" src="/images/logo.png"/>
       <Card bg="dark" text="white" className="form-card">
         <Card.Header>Login</Card.Header>
         <Card.Body>
