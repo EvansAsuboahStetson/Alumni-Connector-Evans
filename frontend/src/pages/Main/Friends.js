@@ -116,7 +116,23 @@ export default function UsersPage() {
 
 
 
-
+  const handleDelete = (connectedFriends) => {
+    // Show confirm modal
+    setConfirm({
+      show: true,
+      title: "Delete friend",
+      message: "Are you sure you want to delete this friend?",
+      onConfirm: () => {
+        setConfirm({
+          show: false,
+          title: "",
+          message: "",
+          onConfirm: () => {},
+        });
+        //deleteEvent(connectedFriends);
+      },
+    });
+  };
 
 
 
@@ -140,9 +156,24 @@ export default function UsersPage() {
       )}
 
       <Users
-        users={users}
+        users={users} onDelete={handleDelete}
        
       />
+
+      <ConfirmModal
+              show={confirm.show}
+              title={confirm.title}
+              message={confirm.message}
+              onHide={() =>
+                setConfirm({
+                  show: false,
+                  title: "",
+                  message: "",
+                  onConfirm: () => {},
+                })
+              }
+              onConfirm={confirm.onConfirm}
+            />
 
       <UserFormModal {...userForm} />
     </Container>
