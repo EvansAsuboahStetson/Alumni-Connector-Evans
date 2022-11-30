@@ -2,12 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button, Container, Spinner } from "react-bootstrap";
 import Events from "../../components/Events/Events";
-import {
-  getUserEvents,
-  updateUserEvent,
-  deleteUserEvent,
-  createUserEvent,
-} from "../../functions/userEvents";
+import {getUserEvents, updateUserEvent, deleteUserEvent, createUserEvent} from "../../functions/userEvents";
 import AlertModal from "../../components/AlertModal/AlertModal";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import EventFormModal from "../../components/EventFormModal/EventFormModal";

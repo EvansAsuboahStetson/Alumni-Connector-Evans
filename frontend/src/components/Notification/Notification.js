@@ -41,7 +41,6 @@ function Notification() {
 
      
         setpentID()
-        setNames()
     
         
     }
@@ -65,7 +64,6 @@ function Notification() {
         setdel(!del)
 
         setpentID()
-        setNames()
     
         
     }
