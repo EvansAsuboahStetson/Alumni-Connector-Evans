@@ -9,8 +9,8 @@ export default function EventFormModal(props) {
   const nameRef = useRef(event?.name);
   const descriptionRef = useRef(event?.description);
   const dateRef = useRef(event?.date);
-  const StarttimeRef = useRef(event?.Starttime);
-  const EndtimeRef = useRef(event?.Endtime);
+  const starttimeRef = useRef(event?.starttime);
+  const endtimeRef = useRef(event?.endtime);
   const locationRef = useRef(event?.location);
 
   useEffect(() => {
@@ -35,8 +35,8 @@ export default function EventFormModal(props) {
       description: descriptionRef.current.value,
       date: dateRef.current.value,
       location: locationRef.current.value,
-      Starttime: StarttimeRef.current.value,
-      Endtime: EndtimeRef.current.value,
+      starttime: starttimeRef.current.value,
+      endtime: endtimeRef.current.value,
     };
 
     onSubmit(event);
@@ -82,24 +82,24 @@ export default function EventFormModal(props) {
             />
           </Form.Group>
 
-          <Form.Group controlId="formBasicTextTime">
+          <Form.Group controlId="formBasicTime">
             <Form.Label>Event Start Time</Form.Label>
             <Form.Control
               type="time"
               placeholder="Enter Event Start Time"
-              ref={StarttimeRef}
-              defaultValue={event?.Starttime}
+              ref={starttimeRef}
+              defaultValue={event?.starttime}
               required
             />
           </Form.Group>
 
-          <Form.Group controlId="formBasicTextTime">
+          <Form.Group controlId="formBasicTime">
             <Form.Label>Event End Time</Form.Label>
             <Form.Control
               type="time"
               placeholder="Enter Event End Time"
-              ref={EndtimeRef}
-              defaultValue={event?.Endtime}
+              ref={endtimeRef}
+              defaultValue={event?.endtime}
               required
             />
           </Form.Group>

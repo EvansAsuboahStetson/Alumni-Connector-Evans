@@ -23,6 +23,14 @@ const model = mongoose.Schema(
       ref: "User",
       required: true,
     },
+    starttime: {
+      type: String, 
+      required: true,
+    },
+    endtime: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

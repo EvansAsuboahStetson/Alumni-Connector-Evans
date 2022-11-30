@@ -17,7 +17,10 @@ const MenuBar = (props) => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
-                <img src="/Logo.png"/>
+              <a href="https://www.fontspace.com/category/modern">
+                <img src="https://see.fontimg.com/api/renderfont4/JR1o/eyJyIjoiZnMiLCJoIjozNSwidyI6MTI1MCwiZnMiOjI4LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/QWx1bW5pQ29ubmVjdA/steiner-light.png" alt="Modern fonts">
+                  </img>
+                  </a>
                 {menuItems.map((item, index) => {
                   return (
                     <Nav.Link key={index} as={Link} to={item.link}>
@@ -31,6 +34,7 @@ const MenuBar = (props) => {
                     <NavDropdown.Item href="#action/3.1">Investments</NavDropdown.Item>
                     <NavDropdown.Item href="#action/3.2">Entrepreneurship</NavDropdown.Item>
                     <NavDropdown.Item href="#action/3.3">Management</NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.3">My Notes</NavDropdown.Item>
                   <NavDropdown.Divider/>
                 </NavDropdown>
                 

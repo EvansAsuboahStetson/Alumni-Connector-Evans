@@ -21,8 +21,6 @@ import FilterView from "../FilterView/filterView";
 
 import FriendPage from "../../pages/Main/Friends";
 
-
-
 function getMenuItems(user) {
   if (!user) {
     return [];
@@ -34,7 +32,6 @@ function getMenuItems(user) {
     { name: "Profile", link: `/users/${user._id}` },
     {name: "Filter",link:`/search/filter`},
     {name: "Friends",link:`/friends`},
-    
   ];
 
   if (user.role === "admin") {
@@ -62,7 +59,6 @@ function getRoutes(user) {
     {path:"/search/filter",component:Filter,exact:true},
     
     {path:"/friends",component:FriendPage,exact:true},
-
   ];
 }
 
