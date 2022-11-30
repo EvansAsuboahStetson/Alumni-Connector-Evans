@@ -115,11 +115,27 @@ export const deleteFriendRequest = async (token,credentials) => {
   });
 };
 
-
+//user/namesOfPendingRequest
 export const pendingFriendRequest = async (token) => {
   return axios({
     method: "GET",
     url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.PENDDINGUSEREXIST}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+
+
+
+
+export const pendingRequestNames = async (token,credentials) => {
+  console.log(credentials,"creditity")
+  return axios({
+    method: "post",
+    data:credentials,
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.FRIENDREUQESTNAMES}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },

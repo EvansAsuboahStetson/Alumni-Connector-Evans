@@ -4,13 +4,14 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Toast from "react-bootstrap/Toast";
 import Noty from "./NotiIcon";
-import {acceptFriendRequest,pendingFriendRequest,deleteFriendRequest} from "../../functions/users"
+import {acceptFriendRequest,pendingFriendRequest,deleteFriendRequest,pendingRequestNames} from "../../functions/users"
 import Modal from "react-bootstrap/Modal";
 
 function Notification() {
   const [showA, setShowA] = useState(false);
   const [pendID, setpentID] = useState();
   const [data, setData] = useState([]);
+  const [names, setNames] = useState([]);
 
   const [count, setCount] = useState(0);
   const[del,setdel] =useState(false)
@@ -55,6 +56,10 @@ function Notification() {
         const datum ={
             id:pendID
         }
+
+       
+
+
         const {data} = await deleteFriendRequest(token,datum);
         setdel(!del)
 
@@ -90,6 +95,43 @@ function Notification() {
     findRequest();
   }, [del]);
 
+  useEffect(() =>{
+  
+
+      const friendNames =  async() =>{
+        try{
+          const token = localStorage.getItem("token");
+  
+        
+    
+          const IdDatum = {
+            follower: data
+          }
+          if (data?.length>0)
+          {
+            
+            const {data} =  await pendingRequestNames(token,IdDatum);
+            console.log(data)
+
+            setNames(data)
+            
+
+          }
+       
+        
+        }
+        
+          catch(err)
+          {
+            console.log(err)
+          }
+    
+
+      }
+     friendNames()
+
+    },[data])
+
  
 
   return (
@@ -107,9 +149,9 @@ function Notification() {
           <strong className="me-auto">Friend Request</strong>
           <small>11 mins ago</small>
         </Toast.Header>
-        {data?.map((user) => (
-          <Toast.Body onClick={() => handleShow(user)}>
-            You have friend request from {user}
+        {names?.map((user) => (
+          <Toast.Body onClick={() => handleShow(user._id)}>
+            You have friend request from {user.name}
           </Toast.Body>
         ))}
       </Toast>
