@@ -17,7 +17,7 @@ const MenuBar = (props) => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
-                <img src="/Logo.png"/>
+                <img src="/images/logo.png"/>
                 {menuItems.map((item, index) => {
                   return (
                     <Nav.Link key={index} as={Link} to={item.link}>
