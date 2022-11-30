@@ -17,6 +17,7 @@ const MenuBar = (props) => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
+                <img src="/Logo.png"/>
                 {menuItems.map((item, index) => {
                   return (
                     <Nav.Link key={index} as={Link} to={item.link}>
@@ -24,6 +25,7 @@ const MenuBar = (props) => {
                     </Nav.Link>
                   );
                 })}
+
                 <NavDropdown title="Resource Library" id="basic-nav-dropdown">
                   <NavDropdown.Divider/>
                     <NavDropdown.Item href="#action/3.1">Investments</NavDropdown.Item>
@@ -31,6 +33,7 @@ const MenuBar = (props) => {
                     <NavDropdown.Item href="#action/3.3">Management</NavDropdown.Item>
                   <NavDropdown.Divider/>
                 </NavDropdown>
+                
               </Nav>
             </Navbar.Collapse>
             <SearchBar setFilteredData={setFilteredData} filteredData={filteredData} />
@@ -58,4 +61,4 @@ const MenuBar = (props) => {
   );
 }
 
-export default MenuBar
+export default MenuBar;
