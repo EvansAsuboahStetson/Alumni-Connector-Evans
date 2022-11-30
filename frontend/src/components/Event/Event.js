@@ -44,8 +44,8 @@ export default function Event(props) {
             <Card.Text>{event.description}</Card.Text>
             <Card.Text>Location: {event.location}</Card.Text>
             <Card.Text>Date: {event.date}</Card.Text>
-            <Card.Text>Start Time: {event.Starttime}</Card.Text>
-            <Card.Text>End Time: {event.Endtime}</Card.Text>
+            <Card.Text>Start Time: {event.starttime}</Card.Text>
+            <Card.Text>End Time: {event.endtime}</Card.Text>
           </Card.Body>
         </Col>
         <Col md="2">

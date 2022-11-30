@@ -510,6 +510,8 @@ exports.createUserEvent = (req, res) => {
     description: req.body.description,
     location: req.body.location,
     image: req.body.image,
+    starttime: req.body.starttime,
+    endtime: req.body.endtime,
     createdBy: req.params.userId,
   };
 
@@ -704,6 +706,8 @@ exports.updateUserEvent = (req, res) => {
         description: req.body.description || event.description,
         location: req.body.location || event.location,
         image: req.body.image || event.image,
+        starttime: req.body.starttime || starttime,
+        endtime: req.body.endtime || endtime,
       };
 
       eventService
