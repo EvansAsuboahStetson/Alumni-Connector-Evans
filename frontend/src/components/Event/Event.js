@@ -1,8 +1,38 @@
+import { useEffect, useState } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import User from "../../components/User/User";
+import { pendingRequestNames } from "../../functions/users";
 
 export default function Event(props) {
   const { event, onEdit, onDelete } = props;
+  const [name,setName] = useState()
+
+  useEffect(()=>{
+    const getNames =async()=>{
+     const user = event?.createdBy
+
+
+     try{
+      const token = localStorage.getItem("token");
+      const datum= {
+        follower: [user]
+      }
+      const {data} = await pendingRequestNames(token,datum)
+
+      setName(data[0]?.name)
+     
+
+     }
+     catch(error)
+     {
+
+     }
+    }
+
+    getNames()
+
+  },[props])
+
 
   return (
     <Card className="mt-2 mb-2">
@@ -10,7 +40,7 @@ export default function Event(props) {
         <Col md="6">
           <Card.Body>
             <Card.Title>{event.name}</Card.Title>
-            <Card.Text>Posted By: {User.name}</Card.Text>
+            <Card.Text>Posted By: {name}</Card.Text>
             <Card.Text>{event.description}</Card.Text>
             <Card.Text>Location: {event.location}</Card.Text>
             <Card.Text>Date: {event.date}</Card.Text>

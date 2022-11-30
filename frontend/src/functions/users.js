@@ -131,7 +131,7 @@ export const pendingFriendRequest = async (token) => {
 
 
 export const pendingRequestNames = async (token,credentials) => {
-  console.log(credentials,"creditity")
+  console.log(credentials)
   return axios({
     method: "post",
     data:credentials,
