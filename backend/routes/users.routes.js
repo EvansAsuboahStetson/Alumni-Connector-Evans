@@ -4,6 +4,8 @@ const middleware = require("../middlewares");
 const usersController = require("../controllers/users.controller");
 
 // Retrieve all users
+
+router.post("/user/usersFound", middleware.verify, usersController.findUsersInArray);
 router.get(
   "/users",
   middleware.verify,
@@ -18,15 +20,11 @@ router.post(
   usersController.findMatches
 );
 
-
-
 router.patch(
   "/user/deleteRequest",
   middleware.verify,
   usersController.deleteFriendRequest
 );
-
-
 
 router.patch(
   "/user/acceptRequest",
@@ -36,10 +34,18 @@ router.patch(
 
 router.post("/user/pending", middleware.verify, usersController.pending);
 
-router.post("/user/sentRequest", middleware.verify, usersController.pendingSent)
+router.post(
+  "/user/sentRequest",
+  middleware.verify,
+  usersController.pendingSent
+);
 ///
 
-router.post("/user/connectionexist", middleware.verify, usersController.isConnected);
+router.post(
+  "/user/connectionexist",
+  middleware.verify,
+  usersController.isConnected
+);
 router.get(
   "/user/pendingRequest",
   middleware.verify,
@@ -66,11 +72,7 @@ router.get(
   usersController.findById
 );
 
-router.get(
-  "/user/userId",
-  middleware.verify,
-  usersController.findById
-);
+router.get("/user/userId", middleware.verify, usersController.findById);
 
 // Update user by userId
 router.patch(
@@ -116,17 +118,14 @@ router.post(
   "/user/follower/friends",
   middleware.verify,
   usersController.findFriends
-
-)
+);
 router.post(
   "/user/follower/posts",
   middleware.verify,
   usersController.findUserEventByIdFollower
-
-)
+);
 
 router.get(
- 
   "/user/follower/events",
   middleware.verify,
   usersController.findFollowerEvents

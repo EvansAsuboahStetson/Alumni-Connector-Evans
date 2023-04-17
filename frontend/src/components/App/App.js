@@ -12,7 +12,7 @@ import Filter from "../Filter/filter"
 import { BrowserRouter as Router} from "react-router-dom";
 import Matches from "../../pages/Main/Matches";
 
-import Majorpage from "../../pages/Main/MajorPage";
+import PostPage from "../../pages/Main/PostPage";
 //import SearchDisplay from "../Search/SearchDisplay";
 import { useState } from "react";
 import ViewUser from "../ViewUser/ViewUser";
@@ -55,7 +55,7 @@ function getRoutes(user) {
     {path:"/matches",component: Matches,exact:true},
     {path:"/user/userView",component:ViewUser,exact:true},
 
-    { path: "/majorpage", component: Majorpage, exact: true},
+    { path: "/postpage", component: PostPage, exact: true},
     {path:"/search/filter",component:Filter,exact:true},
     
     {path:"/friends",component:FriendPage,exact:true},

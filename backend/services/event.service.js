@@ -15,23 +15,13 @@ exports.findUserEvents = (userId) => {
   return findEventByFilter({ createdBy: userId });
 };
 
-exports.findFollowerPost=(userId)=>{
-  return findEventByFilter({createdBy: {$in: userId}})
-}
+exports.findFollowerPost = (userId) => {
+  return findEventByFilter({ createdBy: { $in: userId } });
+};
 
-
-exports.findFollowerEvents = (followerId)=>{
-  return findEventByFilter ({createdBy: followerId})
-}
-
-
-
-
-
-
-
-
-
+exports.findFollowerEvents = (followerId) => {
+  return findEventByFilter({ createdBy: followerId });
+};
 
 // Function to find event by eventId
 exports.findEventById = (eventId) => {
@@ -40,7 +30,7 @@ exports.findEventById = (eventId) => {
 
 // Function to create an event
 exports.createEvent = (data) => {
-  console.log(data);
+
   const event = new Event(data);
 
   // Save event in the database

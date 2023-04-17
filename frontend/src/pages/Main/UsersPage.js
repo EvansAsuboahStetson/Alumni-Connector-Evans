@@ -7,6 +7,7 @@ import AlertModal from "../../components/AlertModal/AlertModal";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import UserFormModal from "../../components/UserFormModal/UserFormModal";
 
+
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -34,6 +35,7 @@ export default function UsersPage() {
       try {
         const token = localStorage.getItem("token");
         const response = await getUsers(token);
+        console.log("HEYEYE",response)
         setUsers(response.data);
       } catch (error) {
         // Show error
@@ -181,6 +183,7 @@ export default function UsersPage() {
 
 
       <UserFormModal {...userForm} />
+      
     </Container>
   );
 }

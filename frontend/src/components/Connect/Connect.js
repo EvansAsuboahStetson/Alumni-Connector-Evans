@@ -38,12 +38,12 @@ function Connect({ name, id, change }) {
 
       if (userpending !== undefined) {
         setBtnPending(true);
-        console.log("Yes pending undefined");
+
         return;
       } else if (userSent !== undefined) {
         console.log(userSent, "Sent");
         if (isConnect_array !== undefined) {
-          console.log("Yes connected undefined");
+   
           setBtnConnect(true);
           return;
         }

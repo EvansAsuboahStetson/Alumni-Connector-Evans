@@ -235,7 +235,7 @@ export default function UserEventsPage() {
       {/* Show create event button at bottom center */}
       <div className="d-flex justify-content-center">
         <Button variant="dark" className="mt-3 mb-3" onClick={handleCreate}>
-          Create Event
+          Create Events
         </Button>
       </div>
 

@@ -48,6 +48,22 @@ export const connectionRequest = async (token,credentials) => {
     },
   });
 };
+
+export const findFriends = async (token,credentials)=>{
+  console.log(credentials,"YYYYYYYYYYYY")
+
+  return axios({
+    method: "POST",
+    data:credentials,
+    url: `${constants.API.BASE_URL}${constants.API.ENDPOINTS.FINDUSERS}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+}
+
+
 export const pendingFriend = async (token,credentials) => {
  
   return axios({

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import React, { useEffect, useState } from "react";
 import "./SearchDisplay.css";
 import User from "../../components/User/User";
@@ -22,6 +23,7 @@ function SearchDisplay(props) {
   };
 
   useEffect(() => {
+    console.log(filteredData)
     if (filteredData?.length > 7) {
       console.log("Yo you are in");
       setSeeAllData(true);
@@ -35,7 +37,7 @@ function SearchDisplay(props) {
   }
   return (
     <div className="forms">
-      {filteredData?.length != 0 && (
+      {filteredData?.length != 0 ? (
         <ListGroup className="dataResult">
           {filteredData?.slice(0, 6).map((value, index) => {
             return (
@@ -61,6 +63,10 @@ function SearchDisplay(props) {
             );
           })}
         </ListGroup>
+      ) : (
+        <div className="noData">
+          No user found{console.log("No user")}
+        </div>
       )}
       {seeAllData == true && (
         <div className="seeAll">

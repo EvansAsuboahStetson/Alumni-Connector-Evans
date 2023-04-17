@@ -1,0 +1,35 @@
+.comment-container:hover > div {
+
+    background-color:rgba(204,204,204);
+    width: 100%;
+    padding: "100px";
+    border-radius: "50px";
+  }
+  
+
+.ButtonClassName {
+    background-color: white;
+}
+
+  .ButtonClassName:hover{
+    background-color:rgba(204,204,204);
+    width: auto;
+    padding: "100px";
+    border-radius: "50px";
+  
+  }
+  .post-avatar {
+    float: left;
+    margin-right: 10px;
+  }
+  .card-flex{
+    float: left;
+    width: auto;
+  
+  }
+  .card-title {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  

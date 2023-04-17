@@ -1,0 +1,42 @@
+.commentList {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+.reply-comment {
+  margin-right: 10px;
+  height: 30px;
+  width: 50px;
+}
+.like-comment {
+    margin-right: 10px;
+    height: 30px;
+    width: 50px;
+  }
+.separator {
+  border-left: 1px solid black;
+  height: 20px;
+
+  margin-right: 10px;
+}
+.reply-comment:hover {
+  background-color: rgba(204, 204, 204);
+
+  padding: "10px";
+  height: 30px;
+  width: 50px;
+
+  border-radius: 10px;
+}
+
+.like-comment:hover {
+    background-color: rgba(204, 204, 204);
+  
+    padding: "10px";
+    height: 30px;
+    width: 50px;
+  
+    border-radius: 10px;
+  }

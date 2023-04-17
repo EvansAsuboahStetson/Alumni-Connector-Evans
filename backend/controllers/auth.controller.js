@@ -7,6 +7,7 @@ const { constants } = require("../constants");
 exports.login = (req, res) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
+  
       if (!user) res.status(404).json({ message: "User not found" });
       else {
         bcrypt.compare(req.body.password, user.password, (error, match) => {
@@ -17,6 +18,8 @@ exports.login = (req, res) => {
               email: user.email,
               _id: user._id,
               role: user.role,
+              name: user.name
+             
             };
             const token = generateToken(data);
             res.status(200).json({ token, ...data });
@@ -60,6 +63,7 @@ exports.signup = (req, res) => {
             email: user.email,
             _id: user._id,
             role: user.role,
+            name: user.name
           };
           const token = generateToken(data);
           res.status(200).json({ token, ...data });
