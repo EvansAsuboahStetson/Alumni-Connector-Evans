@@ -9,4 +9,4 @@ Here's what he has to say about his vision for the app:
 
 -----This is what the cs students have currently  for the entrepreneurship student
 
-![me](https://github.com/Alumni-Connector/Alumni-Connector-original/blob/main/alumni_connector.gif)
+https://www.youtube.com/watch?v=oJvWCRGjdXA
