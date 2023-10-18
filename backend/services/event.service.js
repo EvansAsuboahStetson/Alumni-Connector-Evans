@@ -4,7 +4,7 @@ const Event = require("../models/event.model");
 const findEventByFilter = (filter) => {
   return Event.find(filter);
 };
-
+//
 // Function to find all events
 exports.findAllEvents = (user_Id) => {
   return findEventByFilter({});

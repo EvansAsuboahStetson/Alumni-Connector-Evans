@@ -8,3 +8,13 @@
 
 
 }
+.menu-bar-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px; /* adjust the padding as per your requirement */
+  }
+  
+  .menu-bar-right > * {
+    margin-right: 10px; /* adjust the margin as per your requirement */
+  }

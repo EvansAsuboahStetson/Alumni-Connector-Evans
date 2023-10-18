@@ -5,7 +5,13 @@
     padding: "100px";
     border-radius: "50px";
   }
-  
+  .highlight {
+    color: blue;
+  }
+  .like_hover :hover{
+    text-decoration: underline;
+    color: blue;
+  }
 
 .ButtonClassName {
     background-color: white;

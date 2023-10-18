@@ -1,6 +1,6 @@
 const User = require("../models/user.model");
 const eventService = require("../services/event.service");
-const Post =  require("../models/post.model");
+const Post = require("../models/post.model");
 
 // Function to find all users
 
@@ -15,56 +15,15 @@ exports.findUsersArray = (req, res) => {
     });
 };
 
-// exports.findUsersInArray = (req, res) => {
-//   const user_array = req.body.dada;
-//   console.log(user_array,"Nie")
-
-//   // console.log("Hey",user_array)
-//   // Post.findById(user_array)
-//   //   .populate("comments.user", "name") // Populate the 'user' field of each comment with the 'name' property
-//   //   .select("comments") // Only select the 'comments' field of the post
-//   //   .exec((err, post) => {
-//   //     if (err) {
-//   //       // Handle the error
-//   //       console.error(err);
-//   //       return;
-//   //     }
-//   //     res.send(post);
-//   //   });
-//   // Post.findById(user_array)
-//   // .populate("comments.user", "name") // Join with the User table and select only the "name" field
-//   // .exec((err, post) => {
-//   //   if (err) {
-//   //     console.error(err);
-//   //     return;
-//   //   }
-//   //   const commentUsers = post.comments.map((comment) => comment.user.name); // Extract the names of the comment users
-//   //   console.log(commentUsers); // Log the names of the comment users
-//   // });
-
-
-  
-//   Post.find({ _id: { $in: user_array } })
-//   .populate("user", "name")
-//   .exec((err, posts) => {
-//     if (err) {
-//       console.error(err);
-//       return;
-//     }
-//     // const authorNames = posts.map((post) => post.user.name);
-//     res.send(posts)
-   
-//   });
-// }
 exports.findUsersInArray = (req, res) => {
   const user_array = req.body.dada;
-  
+
   Post.find({ _id: { $in: user_array } })
     .populate("user", "name")
     .populate({
       path: "comments.user",
       select: "name",
-      populate: { path: "user", select: "name" }
+      populate: { path: "user", select: "name" },
     })
     .exec((err, posts) => {
       if (err) {
@@ -72,21 +31,16 @@ exports.findUsersInArray = (req, res) => {
         return;
       }
 
-      const postOwners = posts.map(post => post.user.name);
-
+      const postOwners = posts.map((post) => post.user.name);
 
       const commentOwners = posts.reduce((acc, post) => {
-        const owners = post.comments.map(comment => comment.user.name);
+        const owners = post.comments.map((comment) => comment.user.name);
         return [...acc, ...owners];
       }, []);
 
-  
-      
       res.send(posts);
     });
 };
-
-
 
 exports.findAll = (req, res) => {
   User.find(null, { password: 0 })
@@ -103,11 +57,9 @@ exports.deleteFriendRequest = (req, res) => {
     $pull: { pendingFriends: { $in: [user_remove] } },
   })
     .then((users) => {
-
       res.send(users);
     })
     .catch((err) => {
-      
       res.status(500).json({ message: err.message || "Internal Server error" });
     });
 };
@@ -125,7 +77,6 @@ exports.acceptFriendRequest = (req, res) => {
       });
     })
     .catch((err) => {
-  
       res.status(500).json({ message: err.message || "Internal Server error" });
     });
 };
@@ -187,7 +138,6 @@ exports.pendingSent = (req, res) => {
 
   //#id:user,
   //pendingFriends:{ $in: [loggedIn ] }
-
 
   User.find({ _id: loggedIn, sentRequest: { $in: [user] } })
     .then((user) => {
@@ -315,7 +265,6 @@ exports.filter = (req, res) => {
       role: { $ne: "admin" },
     };
   } else if (major == null && minor == null && interests.length > 0) {
-  
     data = {
       interests: { $all: interests },
       _id: { $ne: id },
@@ -357,7 +306,6 @@ exports.filter = (req, res) => {
     }
     data["role"] = { $nin: ["admin", value] };
   }
-
 
   User.find(data)
     .then((user) => {
@@ -469,6 +417,7 @@ exports.update = (req, res) => {
     req.params.userId,
     {
       name: req.body.name || undefined,
+      headline: req.body.headline || undefined,
       major: req.body.major || undefined,
       minor: req.body.minor || undefined,
       interests: req.body.interests || undefined,

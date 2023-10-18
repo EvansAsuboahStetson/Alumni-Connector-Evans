@@ -9,12 +9,14 @@ import PostBox from "../../components/PostBox/PostBox";
 import { Row, Col } from "react-bootstrap";
 import PostCard from "../../components/PostCardModal/PostCard";
 import PostCardWrapper from "../../components/PostCardModal/PostCardWrapper";
+import { getUserId } from "../../functions/users";
 
 export default function HomePage() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({ show: false, title: "", message: "" });
   const [connectedFriends, setConnectedFriends] = useState([]);
+  const [user,setUser]= useState({})
 
   const getAllFollowers = async () => {
     try {
@@ -26,6 +28,26 @@ export default function HomePage() {
       console.log(error);
     }
   };
+
+
+
+
+
+
+
+  const getUserInfo = async ()=>{
+    try{
+      const token = localStorage.getItem("token");
+      const response = await getUserId(token);
+      setUser(response.data)
+
+      console.log(response?.data)
+    }
+    catch(error)
+    {
+      console.log(error)
+    }
+  }
 
   const getPost = async () => {
     try {
@@ -65,6 +87,7 @@ export default function HomePage() {
   };
 
   useEffect(() => {
+    getUserInfo()
     getAllFollowers();
   }, []);
 
@@ -80,7 +103,7 @@ export default function HomePage() {
           <EventSearch />
         </Col>
         <Col sm={12} md={6} className="flex-column flex-sm-row">
-          <PostBox />
+          <PostBox props= {user} />
           <PostCardWrapper/>
         </Col>
         <Col>

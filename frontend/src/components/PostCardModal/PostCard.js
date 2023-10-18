@@ -3,19 +3,28 @@ import React, { useEffect, useRef, useState } from "react";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import Image from "./avatar.jpg";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import SendIcon from "@mui/icons-material/Send";
 import "./PostCard.css";
-import { updateUserPost } from "../../functions/userPosts";
+import { updateUserPost, LikePost } from "../../functions/userPosts";
 import CommentList from "../ReplyCommentModal/ReplyLIst";
+import LikesModal from "../DisplayLikes/LikesModal";
 
-function PostCard({ post }) {
+function PostCard({ post, LoggedInuser }) {
+  console.log(post,"is here")
+
+  const [liked, setLiked] = useState(false);
+  const [modalShow, setModalShow] = React.useState(false);
+
+  const userId = LoggedInuser?._id;
+
   const textRef = useRef(post?.comment);
 
   const [commentary, setCommentary] = useState("");
   const [showCommentForm, setShowCommentForm] = useState(false);
 
   const [validated, setValidated] = useState(false);
+  const [updateLike, setUpdateLike] = useState([]);
 
   const sendComment = async (data) => {
     try {
@@ -24,6 +33,26 @@ function PostCard({ post }) {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const LikeComment = async (data) => {
+    try {
+      const token = localStorage.getItem("token");
+      console.log(token);
+      const response = await LikePost(data, token);
+      console.log(response.data.likes, "like Response");
+
+      console.log(userId,"fo")
+      setUpdateLike(response.data.likes);
+      setLiked(response.data.likes.includes(userId));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const likeButton = () => {
+    LikeComment({
+      post_id: post._id,
+    });
   };
 
   const handleCommentChange = (event) => {
@@ -49,7 +78,8 @@ function PostCard({ post }) {
     });
   };
   useEffect(() => {
-    console.log(post);
+    setLiked(post.likes.includes(userId));
+    setUpdateLike(post.likes);
   }, [post]);
 
   return (
@@ -57,7 +87,7 @@ function PostCard({ post }) {
       className="card text-center"
       style={{ maxWidth: "600px", margin: "20px", backgroundColor: "white" }}
     >
-      <div className="card-header">People who like</div>
+      <div className="card-header"></div>
       <div
         className="card-header"
         style={{
@@ -76,7 +106,7 @@ function PostCard({ post }) {
             flexDirection: "row",
           }}
         >
-          <Avatar src={Image}></Avatar>
+          <Avatar src={post.user.profilePic}></Avatar>
           <div
             style={{
               display: "flex",
@@ -88,9 +118,7 @@ function PostCard({ post }) {
           >
             <div style={{ fontWeight: "bold" }}>{post?.user?.name}</div>
             <div style={{ fontSize: "14px" }}>
-              Computer Engineering 24' | Stanford (d.school) University
-              Innovation Fellow | NSBE | Career Pathways Academy Ambassador |
-              NSYP Participant
+         {post?.user?.headline}
             </div>
           </div>
         </div>
@@ -101,9 +129,9 @@ function PostCard({ post }) {
       <div className="card-body"></div>
       <div
         className="card-footer text-muted"
-        style={{ backgroundColor: "white" }}
+        style={{ backgroundColor: "white", flexWrap: "wrap" }}
       >
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
           <div
             className="comment-container"
             onClick={handleCommentClick}
@@ -118,7 +146,7 @@ function PostCard({ post }) {
           </div>
           <div
             className="comment-container"
-            onClick={handleCommentClick}
+            onClick={likeButton}
             style={{ borderRadius: "50px", cursor: "pointer" }}
           >
             <div
@@ -129,9 +157,42 @@ function PostCard({ post }) {
                 padding: "10px",
               }}
             >
-              <ThumbUpOffAltIcon style={{ marginRight: "5px" }} />
+              <ThumbUpOffAltIcon
+                style={{ marginRight: "5px" }}
+                className={liked ? "highlight" : ""}
+              />
               <div style={{ marginRight: "5px" }}>Like</div>
             </div>
+          </div>
+          <div
+            style={{
+              marginLeft: "auto",
+              display: "flex",
+              alignItems: "center",
+            
+            }}
+          >
+            <div style={{ marginRight: "5px" }}>{post.comments.length}</div>
+            <div style={{ marginRight: "5px" }}>
+              {post.comments.length === 1 ? "comment" : "comments"}
+            </div>
+            
+
+            <div
+              className="like_hover"
+              style={{
+                marginLeft: "auto",
+                display: "flex",
+                alignItems: "center",
+                cursor: "pointer",
+              }}
+              variant="primary"
+              onClick={() => setModalShow(true)}
+            >
+              <div >{updateLike?.length}</div>
+              <div>{updateLike?.length === 1 ? "like" : "likes"}</div>
+            </div>
+            <LikesModal show={modalShow} onHide={() => setModalShow(false)} post = {post}  updatelike={updateLike}/>
           </div>
           <div
             className="comment-container"

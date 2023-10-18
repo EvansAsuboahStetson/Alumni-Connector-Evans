@@ -11,6 +11,9 @@ function CommentList({ comments, post }) {
   const [replyCommentId, setReplyCommentId] = useState(null);
   const [showRepliesForComment, setShowRepliesForComment] = useState(null);
 
+
+  console.log(post,"Is here")
+
   const handleSubmit = async (event, commentId) => {
     event.preventDefault();
     const replyText = event.target.elements.formBasicText.value;
@@ -32,11 +35,14 @@ function CommentList({ comments, post }) {
   };
 
   const changeName = (name) => {
-    const nameArray = name.split(" ");
-    const lastName = nameArray[nameArray.length - 1];
-    return nameArray[0][0] + lastName[0][0];
+    if (name) {
+      const nameArray = name.split(" ");
+      const lastName = nameArray[nameArray.length - 1];
+      return nameArray[0][0] + lastName[0][0];
+    }
+    return "";
   };
-
+  
   const handleReplyClick = (commentId) => {
     setShowReplyForm(!showReplyForm);
     setReplyCommentId(commentId);
@@ -49,11 +55,16 @@ function CommentList({ comments, post }) {
       setShowRepliesForComment(commentId);
     }
   };
+  useEffect(()=>{
+    console.log(comments,"SS")
+  },[comments])
 
   return (
     <div className="loopComments">
-      {comments.map((comment, index) => (
+      {comments?.map((comment, index) => (
+        
         <div key={index}>
+         
           <div
             className="comment"
             style={{
@@ -63,7 +74,7 @@ function CommentList({ comments, post }) {
             }}
           >
             <Avatar className="post-avatar">
-              {changeName(comment.user.name)}
+              {changeName(comment?.name)}
             </Avatar>
             <div className="card" style={{ width: "38rem" }}>
               <div className="card-body">
@@ -89,17 +100,29 @@ function CommentList({ comments, post }) {
               <div className="like-comment" style={{ cursor: "pointer" }}>
                 Like
               </div>
+              {comment.replies.length > 0 && (
+                <div
+                
+                  className="showReply"
+                  style={{
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                    color: "grey",
+                    marginLeft: "auto",
+              display: "flex",
+              alignItems: "center",
+                  }}
+                  onClick={() => handleShowReplies(comment._id)}
+                >
+                  {showRepliesForComment === comment._id
+                    ? `Hide Replies (${comment.replies.length})`
+                    : `Show ${comment.replies.length} ${
+                        comment.replies.length === 1 ? "Reply" : "Replies"
+                      }`}
+                </div>
+              )}
             </div>
-            {comment.replies.length > 0 && (
-              <button
-                className="showReply"
-                onClick={() => handleShowReplies(comment._id)}
-              >
-                {showRepliesForComment === comment._id
-                  ? "Hide Replies"
-                  : "Show Replies"}
-              </button>
-            )}
+
             {showRepliesForComment === comment._id && (
               <>
                 {comment?.replies?.map((reply, index) => (

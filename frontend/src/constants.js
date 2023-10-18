@@ -13,6 +13,10 @@ exports.constants = {
       UPDATECOMMENTS:"/updateComment",
       POSTREPLY:"/createReply",
       FINDUSERS:"/api/user/usersFound",
+      LIKEPOST:"/likePost",
+      GETLIKEPOST:"/getLikesInfo",
+      
+      GETFRIENDSMUTUALS:"/getFriendsMutuals",
       ///user/namesOfPendingRequest
       FRIENDREUQESTNAMES:"/api/user/namesOfPendingRequest",
       FOLLOWERPOSTS: "/api/user/follower/posts",

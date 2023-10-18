@@ -5,9 +5,13 @@ import Stack from "@mui/material/Stack";
 import "./UserPost.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import AlertModal from "../../AlertModal/AlertModal";
+import { getUserId } from "../../../functions/users";
+import Chat from "../../Chat/Chat";
 
 // Show modal to create or edit Twitter post
 export default function PostForm(props) {
+  console.log(props?.user?._id)
+
   const [validated, setValidated] = useState();
   const { show, onHide, title, post, onSubmit} = props;
 
@@ -92,8 +96,12 @@ export default function PostForm(props) {
           </Button>
           <Button className="m-2" type="submit" variant="success">
             Post
-          </Button>     
+          </Button>    
+          <Button className="m-2" type="submit" variant="success" onClick={"S"}>
+            ChatF
+          </Button>   
  
+          {/* <Chat userId={props?.user?._id} user= {props?.user}/> */}
 
         </Form>
       </Modal.Body>

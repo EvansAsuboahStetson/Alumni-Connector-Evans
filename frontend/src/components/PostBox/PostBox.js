@@ -7,8 +7,12 @@ import Stack from "@mui/material/Stack";
 import PostPage from "../../pages/Main/PostPage";
 import AlertModal from "../AlertModal/AlertModal";
 
-function PostBox() {
+
+function PostBox({props}) {
+  console.log(props, "posting")
+  console.log("POst",props)
   const [showComponent, setShowComponent] = useState(false);
+  const [showChat, setShowChat] = useState(false);
   const [alert, setAlert] = useState({
     show: false,
     title: "",
@@ -31,13 +35,21 @@ function PostBox() {
     setShowComponent(true);
   };
 
+  const handleShowChat = () => {
+    setShowChat(true);
+  };
+
+  const handleHideChat = () => {
+    setShowChat(false);
+  };
+
   return (
     <div class="card border">
       <div class="card-header">What is on your mind</div>
 
       <div class="card-body">
         <Stack direction="row" spacing={2}>
-          <Avatar alt="Remy Sharp" src={AvatarImage} />
+          <Avatar alt="Remy Sharp" src={props.profilePic} />
           <input
             class="form-control"
             type="text"
@@ -46,6 +58,10 @@ function PostBox() {
             readOnly
           />
         </Stack>
+
+       
+     
+
         {showComponent && (
           <PostPage
             showComponent={showComponent}
@@ -60,6 +76,7 @@ function PostBox() {
           message={alert.message}
           onHide={() => setAlert({ show: false, title: "", message: "" })}
         />
+      
       </div>
     </div>
   );

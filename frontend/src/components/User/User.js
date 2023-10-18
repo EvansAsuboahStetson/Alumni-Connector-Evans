@@ -1,9 +1,18 @@
 import { Card, Button, Row, Col } from "react-bootstrap";
 import "./User.css"
+import Cards from "../Chat/Chat"
+import { useEffect } from "react";
 
 export default function User(props) {
-  const { user, onEdit, onDelete, onView } = props;
+  const { user, onEdit, onDelete, onView,UserConnected } = props;
 
+  useEffect(()=>{
+
+    console.log(UserConnected,"UserConnected")
+  },[user])
+
+
+  console.log(user,"Friendship",props)
   return (
     <Card className="mt-2 mb-2 ml-2 mr-2" style={{ width: '22rem', height:'38rem'}}>
       <Row className="g-3">
@@ -62,8 +71,12 @@ export default function User(props) {
                 </Col>
               </Row>
             )}
+            
           </Card.Body>
+          <Cards user={UserConnected} userId={user?._id} loggedInUser={UserConnected?._id}  />
         </Col>
+      
+        
       </Row>
     </Card>
   );

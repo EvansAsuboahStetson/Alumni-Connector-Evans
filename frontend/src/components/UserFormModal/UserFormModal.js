@@ -14,6 +14,7 @@ export default function UserFormModal(props) {
   const majorRef = useRef(user?.major);
   const minorRef = useRef(user?.minor);
   const profilePicRef = useRef(user?.profilePic);
+  const headlineRef = useRef(user?.headline);
   
   useEffect(() => {
     if (show) {
@@ -40,6 +41,7 @@ export default function UserFormModal(props) {
       minor: minorRef.current.value,
       interests: selectedValue,
       profilePic: profilePicRef.current.value,
+      headline: headlineRef.current.value
     };
 
     onSubmit(user);
@@ -247,7 +249,16 @@ const handleFileChange = event => {
             defaultValue=""/>
              
           </Form.Group>
-       
+          <Form.Group controlId="formBasicTextName">
+            <Form.Label>Headline</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Edit headline"
+              ref={headlineRef}
+              defaultValue={user?.headline}
+              required
+            />
+          </Form.Group>
        
           <Button className="m-2" variant="secondary" onClick={onHide}>
             Close

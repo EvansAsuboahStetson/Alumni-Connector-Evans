@@ -63,7 +63,7 @@ function Notification() {
   };
 
   function handleShow(ID) {
-    console.log("Here is my ID", ID);
+
     setPendID(ID);
     setShow(true);
   }

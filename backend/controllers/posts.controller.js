@@ -1,8 +1,7 @@
 const postService = require("../services/post.service");
-const Post = require("../models/post.model");
 
 exports.findAllPost = (req, res) => {
-  console.log(req.user)
+  console.log(req.user);
 
   postService
     .findAll()
@@ -92,15 +91,15 @@ exports.PostReply = (req, res) => {
     });
   }
 
-  console.log(req.user,"req.user")
+  console.log(req.user, "req.user");
   const dataPost = {
     text: req.body.comment,
     user: req.user._id,
-    name:req.user.name
+    name: req.user.name,
   };
 
   const postId = req.body.post_id;
-  const commentId = req.body.commentId
+  const commentId = req.body.commentId;
 
   postService
     .PostReplyId(postId, commentId, dataPost)
@@ -124,6 +123,81 @@ exports.PostReply = (req, res) => {
       });
     });
 };
+
+exports.getLikedPost = (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({
+      message: "Post content can not be empty",
+    });
+  }
+  const postId = req.body.post_id;
+
+
+  postService
+    .getLikes(postId)
+    .then((posts) => {
+      if (!posts) {
+        return res.status(404).send({
+          message: "Post not found.",
+        });
+      }
+
+      res.send(posts);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving liked posts.",
+      });
+    });
+};
+
+exports.PostLike = (req, res) => {
+  const postId = req.body.post_id;
+  postService
+    .PostLikeId(postId, req.user)
+    .then((post) => {
+      if (!post) {
+        return res.status(404).send({
+          message: "Post not found.",
+        });
+      }
+      res.send(post);
+    })
+    .catch((err) => {
+      if (err.kind === "ObjectId") {
+        return res.status(404).send({
+          message: "Post not found.",
+        });
+      }
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving events.",
+      });
+    });
+};
+exports.findMutualsAndFriends = (req, res) => {
+  const user_Id = req.user._id;
+  console.log("They is userID",user_Id)
+  postService
+    .findPostOfFriendsAndMutuals(user_Id)
+    .then((post) => {
+      if (!post) {
+        return res.status(404).send({
+          message: "Post not found.",
+        });
+      }
+      res.send(post);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving liked posts.",
+      });
+    });
+};
+
 exports.findByID = (req, res) => {
   postService
     .findById()
@@ -146,4 +220,8 @@ exports.findByID = (req, res) => {
         message: err.message || "Some error occurred while retrieving events.",
       });
     });
+
+
+    
+
 };
